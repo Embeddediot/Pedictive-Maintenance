@@ -1,0 +1,112 @@
+12:54:42 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+12:55:08 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+12:55:34 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+12:55:34 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -DUSE_NUCLEO_64 -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/BSP/STM32H7xx_Nucleo -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Blinky_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\uller\OneDrive - Danmarks Tekniske Universitet\Uni\Kandidat\Sommer semester\SpecialCourse\GIT\Pedictive-Maintenance\Projects\Blinky\CM7\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Blinky_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Blinky_CM7.elf
+ 
+arm-none-eabi-size  Blinky_CM7.elf 
+arm-none-eabi-objdump -h -S Blinky_CM7.elf  > "Blinky_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  20996	    136	   2144	  23276	   5aec	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: Blinky_CM7.list
+ 
+12:56:35 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+12:56:35 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -DUSE_NUCLEO_64 -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/BSP/STM32H7xx_Nucleo -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Blinky_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\uller\OneDrive - Danmarks Tekniske Universitet\Uni\Kandidat\Sommer semester\SpecialCourse\GIT\Pedictive-Maintenance\Projects\Blinky\CM7\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Blinky_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Blinky_CM7.elf
+ 
+arm-none-eabi-size  Blinky_CM7.elf 
+arm-none-eabi-objdump -h -S Blinky_CM7.elf  > "Blinky_CM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  21076	    136	   2144	  23356	   5b3c	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: Blinky_CM7.list
+ 
+13:14:14 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+13:14:15 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21076	    136	   2144	  23356	   5b3c	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
+13:15:32 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+13:15:33 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21076	    136	   2144	  23356	   5b3c	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
+13:18:54 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+13:18:55 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21076	    136	   2144	  23356	   5b3c	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
+13:21:19 **** Incremental Build of configuration Debug for project Blinky_CM4 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4560	     28	   1572	   6160	   1810	Blinky_CM4.elf
+Finished building: default.size.stdout
+ 
+13:21:21 **** Incremental Build of configuration Debug for project Blinky_CM7 ****
+make -j4 all 
+arm-none-eabi-size  Blinky_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21076	    136	   2144	  23356	   5b3c	Blinky_CM7.elf
+Finished building: default.size.stdout
+ 
