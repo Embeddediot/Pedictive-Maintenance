@@ -1,0 +1,6 @@
+../MyCode/stts22h.cpp:6:1:STTS22H::STTS22H()	16	static
+../MyCode/stts22h.cpp:10:6:bool STTS22H::initialize()	24	static
+../MyCode/stts22h.cpp:19:6:bool STTS22H::readTemperature(float&)	24	static
+../MyCode/stts22h.cpp:30:6:bool STTS22H::writeRegister(uint8_t, uint8_t)	32	static
+../MyCode/stts22h.cpp:38:6:bool STTS22H::readRegister(uint8_t, uint8_t&)	32	static
+../MyCode/stts22h.cpp:48:6:bool STTS22H::readRegisters(uint8_t, uint8_t*, uint16_t)	32	static

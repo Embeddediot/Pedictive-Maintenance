@@ -1,0 +1,6 @@
+../MyCode/iis3dwb.cpp:12:1:IIS3DWB::IIS3DWB()	16	static
+../MyCode/iis3dwb.cpp:16:6:bool IIS3DWB::initialize()	24	static
+../MyCode/iis3dwb.cpp:25:6:bool IIS3DWB::readAcceleration(float&, float&, float&)	32	static
+../MyCode/iis3dwb.cpp:37:6:bool IIS3DWB::writeRegister(uint8_t, uint8_t)	16	static
+../MyCode/iis3dwb.cpp:42:6:bool IIS3DWB::readRegister(uint8_t, uint8_t&)	24	static
+../MyCode/iis3dwb.cpp:47:6:bool IIS3DWB::readRegisters(uint8_t, uint8_t*, uint16_t)	24	static

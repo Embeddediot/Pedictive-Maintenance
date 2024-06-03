@@ -1,0 +1,7 @@
+../Core/Src/main.cpp:78:5:int main()	4
+../Core/Src/main.cpp:176:13:void MX_I2C2_Init()	4
+../Core/Src/main.cpp:224:13:void MX_SPI1_Init()	2
+../Core/Src/main.cpp:272:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:294:6:void Error_Handler()	1
+../Core/Src/main.cpp:303:1:void __static_initialization_and_destruction_0(int, int)	3
+../Core/Src/main.cpp:303:1:cpp)	1
