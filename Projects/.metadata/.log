@@ -265,3 +265,12 @@ java.lang.Exception: A resource exists with a different case: '/Blinky_CM4/Blink
 	at org.eclipse.debug.internal.core.LaunchConfigurationWorkingCopy.doSave(LaunchConfigurationWorkingCopy.java:226)
 	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationTabGroupViewer.lambda$6(LaunchConfigurationTabGroupViewer.java:1504)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-05-29 08:13:17.158
+!MESSAGE Indexed 'STW_test' (44 sources, 107 headers) in 7.63 sec: 15,224 declarations; 137,952 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0013%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-06-03 10:13:12.550
+!MESSAGE Indexed 'IIS3DWB_CM4' (29 sources, 90 headers) in 5.73 sec: 8,685 declarations; 66,580 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0027%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-06-03 10:13:15.506
+!MESSAGE Indexed 'IIS3DWB_CM7' (29 sources, 90 headers) in 2.95 sec: 8,780 declarations; 67,764 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0026%)
