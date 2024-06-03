@@ -1,0 +1,87 @@
+# STM32CubeIDE specific files
+/.cproject
+/.project
+/.settings/
+/.metadata/
+/.prefs/
+/.ipr
+/.iws
+/.iml
+.DS_Store
+*.launch
+*.log
+
+# Compiled object files, libraries, executables
+*.o
+*.a
+*.so
+*.d
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Static analysis tool files
+*.stackdump
+
+# Generated files
+*.bin
+*.elf
+*.hex
+*.map
+*.list
+*.srec
+*.bak
+*.d
+*.su
+*.swp
+
+# Unit test binaries
+test-bin/
+
+# Debug files
+*.dbg
+*.dSYM/
+*.ncb
+*.sdf
+*.suo
+*.pdb
+*.ilk
+*.idb
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+*.swo
+*.swm
+*.swn
+
+# Intermediate files
+*.pyc
+*.pyo
+
+# Generated folders
+/Debug/
+/Release/
+/build/
+
+# Keil specific files
+/UVBuild/
+/Listings/
+/Objects/
+
+# IAR specific files
+/Settings/
+/Obj/
+/Exe/
+
+# AC6 specific files
+/.settings/
+/*.launch
+/out/
+
+# STM32CubeMX generated files
+/Drivers/
+/Middlewares/
+/startup_stm32f*.s
