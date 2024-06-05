@@ -21,12 +21,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Sensor/temp_collect.h"
+#include "Sensor/stts22h_reg.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct {
+  I2C_HandleTypeDef *i2c_handle;
+  uint8_t address;
+} STTS22H;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -52,7 +56,7 @@ I2C_HandleTypeDef hi2c2;
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-
+STTS22H tempSensor; // Define the temperature sensor variable
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -77,7 +81,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	static uint8_t tx_buffer[1000];
+	float temp_data;
   /* USER CODE END 1 */
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
   int32_t timeout;
@@ -98,6 +103,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  /*
   //STTS22H SENSOR INIT
   HAL_Delay(500);
   BSP_LED_Off(LED_RED);
@@ -117,7 +123,9 @@ int main(void)
 	  //printf("[ERROR] SSTS22H (TEMP) an ERROR was when initialising sensor\r\n");
   }
 
-  //VIBRATOR SENSOR INIT
+  //VIBRATOR SENSOR INIT   */
+
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -149,6 +157,7 @@ Error_Handler();
   MX_I2C2_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+  // Initialize the STTS22H sensor
 
   /* USER CODE END 2 */
 
@@ -175,6 +184,18 @@ Error_Handler();
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	temp_data = stts22h_read_data_polling();
+	if(temp_data == 0)
+	{
+		printf("Sensor is not connected\r\n");
+	}
+	else
+	{
+		sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", temp_data);
+		printf("%s", tx_buffer);
+	}
+
+	//HAL_Delay(1000); // Delay 1 second between readings
 
     /* USER CODE END WHILE */
 

@@ -37,7 +37,7 @@
 static int16_t data_raw_temperature;
 static float temperature_degC;
 static uint8_t whoamI;
-static uint8_t tx_buffer[1000];
+//static uint8_t tx_buffer[1000];
 
 /* Extern variables ----------------------------------------------------------*/
 extern I2C_HandleTypeDef hi2c2; // Ensure this matches your I2C handle
@@ -56,9 +56,10 @@ static int32_t platform_read(void *handle, uint8_t reg, uint8_t *bufp,
 static void tx_com(uint8_t *tx_buffer, uint16_t len);
 static void platform_delay(uint32_t ms);
 static void platform_init(void);
+static int connect_flag=0;
 
 /* Main Example --------------------------------------------------------------*/
-void stts22h_read_data_polling(void)
+float stts22h_read_data_polling(void)
 {
   /* Initialize mems driver interface */
   stmdev_ctx_t dev_ctx;
@@ -67,44 +68,53 @@ void stts22h_read_data_polling(void)
   dev_ctx.mdelay = platform_delay;
   dev_ctx.handle = &hi2c2; // Use the correct I2C handle
 
+
   /* Check device ID */
   stts22h_dev_id_get(&dev_ctx, &whoamI);
 
-  if (whoamI != STTS22H_ID)
-    while (1); /* manage here device not found */
+  if (whoamI == STTS22H_ID)
+	  connect_flag = 1;
+    //while (1); /* manage here device not found */
 
   /*
    * Set Output Data Rate
    * WARNING: this function can reset the device configuration.
    */
-  stts22h_temp_data_rate_set(&dev_ctx, STTS22H_1Hz);
+  if (connect_flag == 1)
+  {
+	  stts22h_temp_data_rate_set(&dev_ctx, STTS22H_1Hz);
 
-  /* Enable interrupt on high(=49.5 degC)/low(=2.5 degC) temperature. */
-  //float temperature_high_limit = 49.5f;
-  //stts22h_temp_trshld_high_set(&dev_ctx, (int8_t)(temperature_high_limit / 0.64f) + 64 );
+	  /* Enable interrupt on high(=49.5 degC)/low(=2.5 degC) temperature. */
+	  //float temperature_high_limit = 49.5f;
+	  //stts22h_temp_trshld_high_set(&dev_ctx, (int8_t)(temperature_high_limit / 0.64f) + 64 );
 
-  //float temperature_low_limit = 2.5f;
-  //stts22h_temp_trshld_low_set(&dev_ctx, (int8_t)(temperature_low_limit / 0.64f) + 64 );
+	  //float temperature_low_limit = 2.5f;
+	  //stts22h_temp_trshld_low_set(&dev_ctx, (int8_t)(temperature_low_limit / 0.64f) + 64 );
 
-  /* Read samples in polling mode */
-  while (1) {
-    /*
-     * Read output only if not busy
-     * WARNING: _flag_data_ready_get works only when the device is in single
-     *          mode or with data rate set at 1Hz (this function use the busy
-     *          bit in status register please see the DS for details)
-     */
-    uint8_t flag;
-    stts22h_temp_flag_data_ready_get(&dev_ctx, &flag);
+	  /* Read samples in polling mode */
+	  while (1) {
+		/*
+		 * Read output only if not busy
+		 * WARNING: _flag_data_ready_get works only when the device is in single
+		 *          mode or with data rate set at 1Hz (this function use the busy
+		 *          bit in status register please see the DS for details)
+		 */
+		uint8_t flag;
+		stts22h_temp_flag_data_ready_get(&dev_ctx, &flag);
 
-    if (flag) {
-      /* Read temperature data */
-      memset(&data_raw_temperature, 0, sizeof(int16_t));
-      stts22h_temperature_raw_get(&dev_ctx, &data_raw_temperature);
-      temperature_degC = stts22h_from_lsb_to_celsius(data_raw_temperature);
-      sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", temperature_degC);
-      tx_com(tx_buffer, strlen((char const *)tx_buffer));
-    }
+		if (flag) {
+		  /* Read temperature data */
+		  memset(&data_raw_temperature, 0, sizeof(int16_t));
+		  stts22h_temperature_raw_get(&dev_ctx, &data_raw_temperature);
+		  temperature_degC = stts22h_from_lsb_to_celsius(data_raw_temperature);
+		  //sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", temperature_degC);
+		  //tx_com(tx_buffer, strlen((char const *)tx_buffer));
+		}
+	  }
+	  return temperature_degC;
+  }
+  else{
+	  return connect_flag;
   }
 }
 
