@@ -1,5 +1,5 @@
 Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_tim_ex.o: \
- C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
+ C:/Users/bjs/Documents/DTU/Martin/Pedictive-Maintenance/Projects/data_gather/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
