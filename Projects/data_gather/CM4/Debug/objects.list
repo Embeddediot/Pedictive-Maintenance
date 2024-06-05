@@ -31,5 +31,3 @@
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_uart_ex.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart.o"
 "./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart_ex.o"
-"./MyCode/iis3dwb.o"
-"./MyCode/stts22h.o"

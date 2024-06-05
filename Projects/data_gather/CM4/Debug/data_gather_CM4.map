@@ -38,12 +38,6 @@ C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.external
                               C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o) (_fflush_r)
 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
                               C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o) (_sbrk_r)
-C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
-                              ./MyCode/iis3dwb.o (__aeabi_dmul)
-C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
-                              ./MyCode/iis3dwb.o (__aeabi_i2d)
-C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
-                              ./MyCode/iis3dwb.o (__aeabi_d2f)
 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
                               ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_uart.o (__aeabi_uldivmod)
 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
@@ -5282,224 +5276,6 @@ Discarded input sections
  .comment       0x00000000       0x44 ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart_ex.o
  .ARM.attributes
                 0x00000000       0x34 ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart_ex.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/iis3dwb.o
- .text          0x00000000        0x0 ./MyCode/iis3dwb.o
- .data          0x00000000        0x0 ./MyCode/iis3dwb.o
- .bss           0x00000000        0x0 ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWBC2Ev
-                0x00000000       0x16 ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWB10initializeEv
-                0x00000000       0x44 ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWB16readAccelerationERfS0_S0_
-                0x00000000       0xc0 ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWB13writeRegisterEhh
-                0x00000000       0x1e ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWB12readRegisterEhRh
-                0x00000000       0x1c ./MyCode/iis3dwb.o
- .text._ZN7IIS3DWB13readRegistersEhPht
-                0x00000000       0x22 ./MyCode/iis3dwb.o
- .debug_info    0x00000000      0x3e3 ./MyCode/iis3dwb.o
- .debug_abbrev  0x00000000      0x18e ./MyCode/iis3dwb.o
- .debug_aranges
-                0x00000000       0x48 ./MyCode/iis3dwb.o
- .debug_rnglists
-                0x00000000       0x32 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x72 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000      0xb98 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x1c ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x22 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x8e ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x51 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000      0x103 ./MyCode/iis3dwb.o
- .debug_macro   0x00000000       0x6a ./MyCode/iis3dwb.o
- .debug_macro   0x00000000      0x1df ./MyCode/iis3dwb.o
- .debug_line    0x00000000      0x509 ./MyCode/iis3dwb.o
- .debug_str     0x00000000     0x44a2 ./MyCode/iis3dwb.o
- .comment       0x00000000       0x44 ./MyCode/iis3dwb.o
- .debug_frame   0x00000000       0xf8 ./MyCode/iis3dwb.o
- .ARM.attributes
-                0x00000000       0x34 ./MyCode/iis3dwb.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .group         0x00000000        0xc ./MyCode/stts22h.o
- .text          0x00000000        0x0 ./MyCode/stts22h.o
- .data          0x00000000        0x0 ./MyCode/stts22h.o
- .bss           0x00000000        0x0 ./MyCode/stts22h.o
- .text._ZN7STTS22HC2Ev
-                0x00000000       0x16 ./MyCode/stts22h.o
- .text._ZN7STTS22H10initializeEv
-                0x00000000       0x44 ./MyCode/stts22h.o
- .text._ZN7STTS22H15readTemperatureERf
-                0x00000000       0x70 ./MyCode/stts22h.o
- .text._ZN7STTS22H13writeRegisterEhh
-                0x00000000       0x50 ./MyCode/stts22h.o
- .text._ZN7STTS22H12readRegisterEhRh
-                0x00000000       0x6c ./MyCode/stts22h.o
- .text._ZN7STTS22H13readRegistersEhPht
-                0x00000000       0x70 ./MyCode/stts22h.o
- .debug_info    0x00000000     0x1e96 ./MyCode/stts22h.o
- .debug_abbrev  0x00000000      0x312 ./MyCode/stts22h.o
- .debug_aranges
-                0x00000000       0x48 ./MyCode/stts22h.o
- .debug_rnglists
-                0x00000000       0x31 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x356 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0xb98 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x1c ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x22 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x8e ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x51 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x103 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x6a ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x1df ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x238 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x2e ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x3b ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x1c ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x22 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0xfb ./MyCode/stts22h.o
- .debug_macro   0x00000000     0x1011 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x11f ./MyCode/stts22h.o
- .debug_macro   0x00000000    0x273eb ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x6d ./MyCode/stts22h.o
- .debug_macro   0x00000000     0x3d79 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x190 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x1d6 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x10 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x417 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x18 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x61 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x2a ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x43 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x34 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x16 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x43 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x34 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x10 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x58 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x8e ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x16 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x177 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x38c ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x194 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x10 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x16 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x35 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x16 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x29 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x10 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x3c7 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x5d ./MyCode/stts22h.o
- .debug_macro   0x00000000     0x3b99 ./MyCode/stts22h.o
- .debug_macro   0x00000000     0x1072 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x154 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x130 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x3c2 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0xac ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x72d ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x228 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x66 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x3bb ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x407 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x244 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x3ca ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x4a2 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x51 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x4a ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x22c ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x67 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0xa5 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x218 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x2ea ./MyCode/stts22h.o
- .debug_macro   0x00000000       0x35 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x5e4 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0xc1 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x693 ./MyCode/stts22h.o
- .debug_macro   0x00000000       0xa6 ./MyCode/stts22h.o
- .debug_macro   0x00000000      0x798 ./MyCode/stts22h.o
- .debug_line    0x00000000      0xede ./MyCode/stts22h.o
- .debug_str     0x00000000   0x17b51a ./MyCode/stts22h.o
- .comment       0x00000000       0x44 ./MyCode/stts22h.o
- .debug_frame   0x00000000       0xec ./MyCode/stts22h.o
- .ARM.attributes
-                0x00000000       0x34 ./MyCode/stts22h.o
  .text          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-exit.o)
  .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-exit.o)
  .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-exit.o)
@@ -5713,24 +5489,6 @@ Discarded input sections
  .debug_frame   0x00000000       0x2c C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
  .ARM.attributes
                 0x00000000       0x34 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
- .text          0x00000000      0x254 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
- .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
- .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
- .debug_frame   0x00000000       0x30 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
- .ARM.attributes
-                0x00000000       0x22 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_muldf3.o)
- .text          0x00000000      0x378 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
- .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
- .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00000000       0xac C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
- .ARM.attributes
-                0x00000000       0x22 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
- .text          0x00000000       0xa0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
- .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
- .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
- .debug_frame   0x00000000       0x24 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
- .ARM.attributes
-                0x00000000       0x22 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
  .text          0x00000000       0x30 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .data          0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x00000000        0x0 C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
@@ -5806,8 +5564,6 @@ LOAD ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_uart.o
 LOAD ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_uart_ex.o
 LOAD ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart.o
 LOAD ./Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_usart_ex.o
-LOAD ./MyCode/iis3dwb.o
-LOAD ./MyCode/stts22h.o
 START GROUP
 LOAD C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libstdc++_nano.a
 LOAD C:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libsupc++_nano.a

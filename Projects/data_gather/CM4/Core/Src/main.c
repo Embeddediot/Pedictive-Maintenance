@@ -105,6 +105,7 @@ int main(void)
   BSP_LED_Off(LED_RED);
   BSP_LED_Off(LED_GREEN);
   BSP_LED_Off(LED_YELLOW);
+
   STTS22H tempSensor;
   tempSensor.i2c_handle = &hi2c2;
   tempSensor.address = STTS22H_ADDRESS; //from STTS22H.h
