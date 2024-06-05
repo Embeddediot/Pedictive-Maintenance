@@ -1,5 +1,5 @@
 Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_dma.o: \
- C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c \
+ C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \

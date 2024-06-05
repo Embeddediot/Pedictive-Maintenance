@@ -13,6 +13,7 @@ RM := rm -rf
 -include Drivers/STM32H7xx_HAL_Driver/subdir.mk
 -include Drivers/BSP/STM32H7xx_Nucleo/subdir.mk
 -include Core/Startup/subdir.mk
+-include Core/Src/Sensor/subdir.mk
 -include Core/Src/subdir.mk
 -include Common/Src/subdir.mk
 -include objects.mk
@@ -87,8 +88,8 @@ all: main-build
 main-build: data_gather_CM4.elf secondary-outputs
 
 # Tool invocations
-data_gather_CM4.elf data_gather_CM4.map: $(OBJS) $(USER_OBJS) C:\Users\bjs\STM32CubeIDE\workspace_temp\data_gather\CM4\STM32H755ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "data_gather_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\bjs\STM32CubeIDE\workspace_temp\data_gather\CM4\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="data_gather_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+data_gather_CM4.elf data_gather_CM4.map: $(OBJS) $(USER_OBJS) C:\Users\uller\OneDrive\ -\ Danmarks\ Tekniske\ Universitet\Uni\Kandidat\Sommer\ semester\SpecialCourse\GIT\Pedictive-Maintenance\Projects\data_gather\CM4\STM32H755ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "data_gather_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\uller\OneDrive - Danmarks Tekniske Universitet\Uni\Kandidat\Sommer semester\SpecialCourse\GIT\Pedictive-Maintenance\Projects\data_gather\CM4\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="data_gather_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

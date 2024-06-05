@@ -17,14 +17,11 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <main.h>
-#include "stm32h7xx_hal_conf.h" // Include your specific HAL header
+#include "main.h"
 
-#include "../../MyCode/stts22h.h"
-#include "../../MyCode/iis3dwb.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Sensor/stts22h.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,18 +46,19 @@
 /* Private variables ---------------------------------------------------------*/
 
 I2C_HandleTypeDef hi2c2;
-COM_InitTypeDef BspCOMInit;
+
 SPI_HandleTypeDef hspi1;
 
+UART_HandleTypeDef huart3;
+
 /* USER CODE BEGIN PV */
-STTS22H tempSensor;
-IIS3DWB vibrometer;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 static void MX_GPIO_Init(void);
-static void MX_I2C2_Init(void);
 static void MX_SPI1_Init(void);
+static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -74,36 +72,10 @@ static void MX_SPI1_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-
 int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	static char dataOut[64];
-	HAL_Init();
-	MX_GPIO_Init();
-	MX_I2C2_Init();
-	MX_SPI1_Init();
-	BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-
-	  /* Initialize COM1 port (115200, 8 bits (7-bit data + 1 stop bit), no parity */
-	    BspCOMInit.BaudRate   = 115200;
-	    BspCOMInit.WordLength = COM_WORDLENGTH_8B;
-	    BspCOMInit.StopBits   = COM_STOPBITS_1;
-	    BspCOMInit.Parity     = COM_PARITY_NONE;
-	    BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
-	    if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
-	    {
-	      Error_Handler();
-	    }
-	// Initialize temperature sensor
-	if (!tempSensor.initialize()) {
-	// Handle initialization error
-	Error_Handler();
-	}
-
-	// Initialize vibrometer
-	vibrometer.initialize();
 
   /* USER CODE END 1 */
 
@@ -116,7 +88,7 @@ int main(void)
   Domain D2 goes to STOP mode (Cortex-M4 in deep-sleep) waiting for Cortex-M7 to
   perform system initialization (system clock config, external memory configuration.. )
   */
-  //HAL_PWREx_ClearPendingEvent();
+  HAL_PWREx_ClearPendingEvent();
   HAL_PWREx_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFE, PWR_D2_DOMAIN);
   /* Clear HSEM flag */
   __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
@@ -128,6 +100,26 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  //STTS22H SENSOR INIT
+  HAL_Delay(500);
+  BSP_LED_Off(LED_RED);
+  BSP_LED_Off(LED_GREEN);
+  BSP_LED_Off(LED_YELLOW);
+  STTS22H tempSensor;
+  tempSensor.i2c_handle = &hi2c2;
+  tempSensor.address = STTS22H_ADDRESS; //from STTS22H.h
+
+  if(STTS22H_Initialize(&tempSensor)){
+	  //INDICATE TEMP SENSOR IS ONB
+	  BSP_LED_On(LED_YELLOW);
+	  //printf("[INFO] SSTS22H (TEMP) is initialised\r\n");
+  } else {
+	  BSP_LED_Off(LED_YELLOW);
+	  BSP_LED_On(LED_RED);
+	  //printf("[ERROR] SSTS22H (TEMP) an ERROR was when initialising sensor\r\n");
+  }
+
+  //VIBRATOR SENSOR INIT
 
   /* USER CODE END Init */
 
@@ -137,39 +129,25 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_I2C2_Init();
   MX_SPI1_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  float temperature;
-  float accelX, accelY, accelZ;
+  while (1)
+  {
+    /* USER CODE END WHILE */
 
-  while (1) {
-	sprintf(dataOut, "\r\n LED2 OFF\r\n Press Key button to put it ON\r\n ");
-	printf("%s", dataOut);
-    if (tempSensor.readTemperature(temperature)) {
-      // Use the temperature value
-    } else {
-      // Handle read error
-    }
-
-    if (vibrometer.readAcceleration(accelX, accelY, accelZ)) {
-      // Use the acceleration values
-    } else {
-      // Handle read error
-    }
-
-    HAL_Delay(1000); // Read every second
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
 
 /**
-  * @brief I2C1 Initialization Function
+  * @brief I2C2 Initialization Function
   * @param None
   * @retval None
   */
@@ -265,19 +243,75 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+
+  /* USER CODE END USART3_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pins : PB8 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

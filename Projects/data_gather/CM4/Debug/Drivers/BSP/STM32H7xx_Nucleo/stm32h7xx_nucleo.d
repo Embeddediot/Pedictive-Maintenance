@@ -1,6 +1,6 @@
 Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.o: \
- C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c \
- C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h \
+ C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.c \
+ C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h \
  ../Core/Inc/stm32h7xx_nucleo_conf.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
@@ -34,8 +34,8 @@ Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.o: \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h
-C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h:
+ C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h
+C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h:
 ../Core/Inc/stm32h7xx_nucleo_conf.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -69,4 +69,4 @@ C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucle
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-C:/Users/bjs/STM32CubeIDE/workspace_temp/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h:
+C:/Users/uller/OneDrive\ -\ Danmarks\ Tekniske\ Universitet/Uni/Kandidat/Sommer\ semester/SpecialCourse/GIT/Pedictive-Maintenance/Projects/data_gather/Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h:

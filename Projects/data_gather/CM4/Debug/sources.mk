@@ -39,6 +39,7 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Common/Src \
+Core/Src/Sensor \
 Core/Src \
 Core/Startup \
 Drivers/BSP/STM32H7xx_Nucleo \
