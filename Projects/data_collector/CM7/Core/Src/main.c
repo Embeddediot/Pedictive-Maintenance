@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #include "Sensor/temp_collect.h"
 #include "Sensor/stts22h_reg.h"
+#include "Sensor/iis3dwb_reg.h"
+#include "Sensor/iis3dwb_read_data_polling.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -185,7 +187,7 @@ Error_Handler();
   while (1)
   {
 	temp_data = stts22h_read_data_polling();
-	if(temp_data == 0)
+	if(temp_data == 1000)
 	{
 		printf("Sensor is not connected\r\n");
 	}

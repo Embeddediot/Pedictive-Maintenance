@@ -352,7 +352,8 @@ int32_t stts22h_temperature_raw_get(const stmdev_ctx_t *ctx, int16_t *val)
   uint8_t buff[2];
   int32_t ret;
 
-  ret = stts22h_read_reg(ctx, STTS22H_TEMP_L_OUT, buff, 2);
+  ret = stts22h_read_reg(ctx, STTS22H_TEMP_L_OUT, (uint8_t *)&buff[0], 1);
+  ret = stts22h_read_reg(ctx, STTS22H_TEMP_H_OUT, (uint8_t *)&buff[1], 1);
   *val = (int16_t)buff[1];
   *val = (*val * 256) + (int16_t)buff[0];
 

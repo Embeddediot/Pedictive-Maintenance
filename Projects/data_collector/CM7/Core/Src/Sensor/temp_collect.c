@@ -62,28 +62,32 @@ static int connect_flag=0;
 float stts22h_read_data_polling(void)
 {
   /* Initialize mems driver interface */
-  stmdev_ctx_t dev_ctx;
-  dev_ctx.write_reg = platform_write;
-  dev_ctx.read_reg = platform_read;
-  dev_ctx.mdelay = platform_delay;
-  dev_ctx.handle = &hi2c2; // Use the correct I2C handle
 
+	 stmdev_ctx_t dev_ctx;
+	   dev_ctx.write_reg = platform_write;
+	   dev_ctx.read_reg = platform_read;
+	   dev_ctx.mdelay = platform_delay;
+	   dev_ctx.handle = &hi2c2; // Use the correct I2C handle
 
   /* Check device ID */
-  stts22h_dev_id_get(&dev_ctx, &whoamI);
 
-  if (whoamI == STTS22H_ID)
-	  connect_flag = 1;
-    //while (1); /* manage here device not found */
 
-  /*
-   * Set Output Data Rate
-   * WARNING: this function can reset the device configuration.
-   */
-  if (connect_flag == 1)
+  if (connect_flag==0)
   {
-	  stts22h_temp_data_rate_set(&dev_ctx, STTS22H_1Hz);
+	   stts22h_dev_id_get(&dev_ctx, &whoamI);
+	   connect_flag=1;
+	  if (whoamI == STTS22H_ID)
+	    {
+	  	  stts22h_temp_data_rate_set(&dev_ctx, STTS22H_1Hz);
 
+	    }
+	  else
+	  {
+		connect_flag=0;
+		return 1000;
+	  }
+
+  }
 	  /* Enable interrupt on high(=49.5 degC)/low(=2.5 degC) temperature. */
 	  //float temperature_high_limit = 49.5f;
 	  //stts22h_temp_trshld_high_set(&dev_ctx, (int8_t)(temperature_high_limit / 0.64f) + 64 );
@@ -92,7 +96,6 @@ float stts22h_read_data_polling(void)
 	  //stts22h_temp_trshld_low_set(&dev_ctx, (int8_t)(temperature_low_limit / 0.64f) + 64 );
 
 	  /* Read samples in polling mode */
-	  while (1) {
 		/*
 		 * Read output only if not busy
 		 * WARNING: _flag_data_ready_get works only when the device is in single
@@ -110,12 +113,7 @@ float stts22h_read_data_polling(void)
 		  //sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", temperature_degC);
 		  //tx_com(tx_buffer, strlen((char const *)tx_buffer));
 		}
-	  }
 	  return temperature_degC;
-  }
-  else{
-	  return connect_flag;
-  }
 }
 
 /*
