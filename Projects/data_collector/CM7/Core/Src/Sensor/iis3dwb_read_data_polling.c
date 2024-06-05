@@ -54,9 +54,11 @@
  *            header file of the driver (_reg.h).
  */
 
+#define NUCLEO_H755ZI_Q  /* Define the target board */
+
 #if defined(NUCLEO_H755ZI_Q)
 /* NUCLEO_H755ZI-Q: Define communication interface */
-#define SENSOR_BUS hi2c1
+#define SENSOR_BUS hi2c2
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -64,16 +66,11 @@
 #include <stdio.h>
 #include "iis3dwb_reg.h"
 #include "main.h"
-#if defined(NUCLEO_H755ZI_Q)
-#include "stm32h7xx_hal.h"
-#include "usart.h"
-#include "gpio.h"
-#include "i2c.h"
-#endif
+#include "stm32h7xx_hal.h"  // Include the HAL header file
 
 /* External variables --------------------------------------------------------*/
 #if defined(NUCLEO_H755ZI_Q)
-extern I2C_HandleTypeDef hi2c1;
+extern I2C_HandleTypeDef hi2c2;  // Externally declare hi2c2
 extern UART_HandleTypeDef huart3;
 #endif
 
@@ -105,18 +102,18 @@ static void platform_delay(uint32_t ms);
 static void platform_init(void);
 
 /* Main Example --------------------------------------------------------------*/
-void iis3dwb_read_data_polling(void)
+float iis3dwb_read_data_polling(void)
 {
   stmdev_ctx_t dev_ctx;
   /* Initialize mems driver interface */
   dev_ctx.write_reg = platform_write;
   dev_ctx.read_reg = platform_read;
   dev_ctx.mdelay = platform_delay;
-  dev_ctx.handle = &SENSOR_BUS;
+  dev_ctx.handle = &SENSOR_BUS;  // Ensure SENSOR_BUS is defined
   /* Init test platform */
-  platform_init();
+ // platform_init();
   /* Wait sensor boot time */
-  platform_delay(BOOT_TIME);
+  //platform_delay(BOOT_TIME);
   /* Check device ID */
   iis3dwb_device_id_get(&dev_ctx, &whoamI);
 
@@ -157,16 +154,19 @@ void iis3dwb_read_data_polling(void)
         iis3dwb_from_fs2g_to_mg(data_raw_acceleration[1]);
       acceleration_mg[2] =
         iis3dwb_from_fs2g_to_mg(data_raw_acceleration[2]);
+      /*
       sprintf((char *)tx_buffer,
               "Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n",
               acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
       tx_com(tx_buffer, strlen((char const *)tx_buffer));
+      */
+      return acceleration_mg[1];
     }
 
-    iis3dwb_temp_flag_data_ready_get(&dev_ctx, &reg);
-
+    //iis3dwb_temp_flag_data_ready_get(&dev_ctx, &reg);
+    /*
     if (reg) {
-      /* Read temperature data */
+      // Read temperature data
       memset(&data_raw_temperature, 0x00, sizeof(int16_t));
       iis3dwb_temperature_raw_get(&dev_ctx, &data_raw_temperature);
       temperature_degC = iis3dwb_from_lsb_to_celsius(data_raw_temperature);
@@ -174,6 +174,7 @@ void iis3dwb_read_data_polling(void)
               "Temperature [degC]:%6.2f\r\n", temperature_degC);
       tx_com(tx_buffer, strlen((char const *)tx_buffer));
     }
+    */
   }
 }
 
@@ -230,4 +231,13 @@ static void tx_com(uint8_t *tx_buffer, uint16_t len)
 }
 
 /*
- * @brief  Platform specific delay (platform
+ * @brief  Platform specific delay (platform dependent)
+ *
+ * @param  ms
+ */
+static void platform_delay(uint32_t ms)
+{
+#ifdef NUCLEO_H755ZI_Q
+  HAL_Delay(ms);
+#endif
+}

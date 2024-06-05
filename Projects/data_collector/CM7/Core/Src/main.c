@@ -85,6 +85,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	static uint8_t tx_buffer[1000];
 	float temp_data;
+	float accel_data;
   /* USER CODE END 1 */
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
   int32_t timeout;
@@ -187,13 +188,14 @@ Error_Handler();
   while (1)
   {
 	temp_data = stts22h_read_data_polling();
+	accel_data = iis3dwb_read_data_polling();
 	if(temp_data == 1000)
 	{
 		printf("Sensor is not connected\r\n");
 	}
 	else
 	{
-		sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", temp_data);
+		sprintf((char *)tx_buffer, "Temperature [degC]:%3.2f\r\n", accel_data);
 		printf("%s", tx_buffer);
 	}
 
@@ -270,6 +272,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
+//I2C_HandleTypeDef hi2c2;
 static void MX_I2C2_Init(void)
 {
 

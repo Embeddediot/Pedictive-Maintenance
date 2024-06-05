@@ -28,7 +28,7 @@ extern I2C_HandleTypeDef hi2c2;
 extern UART_HandleTypeDef huart3;
 
 /* Function prototypes */
-void iis3dwb_read_data_polling(void);
+float iis3dwb_read_data_polling(void);
 static int32_t platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
 static int32_t platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
 static void tx_com(uint8_t *tx_buffer, uint16_t len);
