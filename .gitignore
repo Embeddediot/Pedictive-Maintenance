@@ -76,11 +76,6 @@
 **/Obj/
 **/Exe/
 
-# AC6 specific files
-**/.settings/
-**/*.launch
-**/out/
-
 # STM32CubeMX generated files
 **/Drivers/
 **/Middlewares/
