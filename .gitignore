@@ -71,10 +71,6 @@
 **/Listings/
 **/Objects/
 
-# IAR specific files
-**/Settings/
-**/Obj/
-**/Exe/
 
 # STM32CubeMX generated files
 **/Drivers/
