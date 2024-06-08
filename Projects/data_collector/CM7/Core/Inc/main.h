@@ -30,6 +30,7 @@ extern "C" {
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_nucleo.h"
 #include <stdio.h>
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */

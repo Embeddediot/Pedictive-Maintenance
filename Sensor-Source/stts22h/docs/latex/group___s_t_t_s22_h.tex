@@ -1,0 +1,588 @@
+\doxysection{STTS22H}
+\hypertarget{group___s_t_t_s22_h}{}\label{group___s_t_t_s22_h}\index{STTS22H@{STTS22H}}
+
+
+This file provides a set of functions needed to drive the stts22h enhanced inertial module.  
+
+
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___interfaces___functions}{STTS22\+H\+\_\+\+Interfaces\+\_\+\+Functions}}
+\begin{DoxyCompactList}\small\item\em This section provide a set of functions used to read and write a generic register of the device. MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___sensitivity}{STTS22\+H\+\_\+\+Sensitivity}}
+\begin{DoxyCompactList}\small\item\em These functions convert raw-\/data into engineering units. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___data__generation}{STTS22\+H\+\_\+\+Data\+\_\+generation}}
+\begin{DoxyCompactList}\small\item\em This section groups all the functions concerning data generation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___dataoutput}{STTS22\+H\+\_\+\+Dataoutput}}
+\begin{DoxyCompactList}\small\item\em This section groups all the data output functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___common}{STTS22\+H\+\_\+\+Common}}
+\begin{DoxyCompactList}\small\item\em This section groups common useful functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___serial__interface}{STTS22\+H\+\_\+\+Serial\+\_\+interface}}
+\begin{DoxyCompactList}\small\item\em This section groups all the functions concerning main serial interface management. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___s_t_t_s22_h__}{Interrupt\+\_\+on\+\_\+threshold}}
+\begin{DoxyCompactList}\small\item\em This section group all the functions concerning the interrupt on threshold configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group___endianness}{definitions}}
+\item 
+\mbox{\hyperlink{group___s_t_microelectronics}{sensors common types}}
+\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___infos}{STTS22\+H\+\_\+\+Infos}}
+\item 
+\mbox{\hyperlink{group___s_t_t_s22_h___register___union}{STTS22\+H\+\_\+\+Register\+\_\+\+Union}}
+\begin{DoxyCompactList}\small\item\em This union group all the registers having a bit-\/field description. This union is useful but it\textquotesingle{}s not needed by the driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structstts22h__temp__h__limit__t}{stts22h\+\_\+temp\+\_\+h\+\_\+limit\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__temp__l__limit__t}{stts22h\+\_\+temp\+\_\+l\+\_\+limit\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__ctrl__t}{stts22h\+\_\+ctrl\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__status__t}{stts22h\+\_\+status\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__software__reset__t}{stts22h\+\_\+software\+\_\+reset\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\+\_\+dev\+\_\+status\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\+\_\+temp\+\_\+trlhd\+\_\+src\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga3cea6a222ea6c72cb96dbf74fcd85d97}\label{group___s_t_t_s22_h_ga3cea6a222ea6c72cb96dbf74fcd85d97} 
+\#define {\bfseries STTS22\+H\+\_\+\+WHOAMI}~0x01U
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga3d46bc46327214edbf160aae01213995}\label{group___s_t_t_s22_h_ga3d46bc46327214edbf160aae01213995} 
+\#define {\bfseries STTS22\+H\+\_\+\+TEMP\+\_\+\+H\+\_\+\+LIMIT}~0x02U
+\item 
+\Hypertarget{group___s_t_t_s22_h_gab8623054138fd0b0241ad05ae55619b7}\label{group___s_t_t_s22_h_gab8623054138fd0b0241ad05ae55619b7} 
+\#define {\bfseries STTS22\+H\+\_\+\+TEMP\+\_\+\+L\+\_\+\+LIMIT}~0x03U
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga3c87ac74e68010d4f9a016845b981f46}\label{group___s_t_t_s22_h_ga3c87ac74e68010d4f9a016845b981f46} 
+\#define {\bfseries STTS22\+H\+\_\+\+CTRL}~0x04U
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga19c3c6cff0ab20f5a315b6062d820066}\label{group___s_t_t_s22_h_ga19c3c6cff0ab20f5a315b6062d820066} 
+\#define {\bfseries STTS22\+H\+\_\+\+STATUS}~0x05U
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga24a7e133f3251bbe339565348296a12e}\label{group___s_t_t_s22_h_ga24a7e133f3251bbe339565348296a12e} 
+\#define {\bfseries STTS22\+H\+\_\+\+TEMP\+\_\+\+L\+\_\+\+OUT}~0x06U
+\item 
+\Hypertarget{group___s_t_t_s22_h_gaebbe2be8cb28975cbdade4c948a366fc}\label{group___s_t_t_s22_h_gaebbe2be8cb28975cbdade4c948a366fc} 
+\#define {\bfseries STTS22\+H\+\_\+\+TEMP\+\_\+\+H\+\_\+\+OUT}~0x07U
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga550a94ca048c270d5b9c26c117045979}\label{group___s_t_t_s22_h_ga550a94ca048c270d5b9c26c117045979} 
+\#define {\bfseries STTS22\+H\+\_\+\+SOFTWARE\+\_\+\+RESET}~0x0\+CU
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga5181eb756a197a06d1c4ed1f40a065bc}\label{group___s_t_t_s22_h_ga5181eb756a197a06d1c4ed1f40a065bc} 
+\#define {\bfseries \+\_\+\+\_\+weak}~\+\_\+\+\_\+attribute\+\_\+\+\_\+((weak))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group___s_t_t_s22_h_gae7a040708406d1445c1683d5635fd07e}\label{group___s_t_t_s22_h_gae7a040708406d1445c1683d5635fd07e} 
+enum {\bfseries stts22h\+\_\+odr\+\_\+temp\+\_\+t} \{ \newline
+{\bfseries STTS22\+H\+\_\+\+POWER\+\_\+\+DOWN} = 0x00
+, {\bfseries STTS22\+H\+\_\+\+ONE\+\_\+\+SHOT} = 0x01
+, {\bfseries STTS22\+H\+\_\+1\+Hz} = 0x04
+, {\bfseries STTS22\+H\+\_\+25\+Hz} = 0x02
+, \newline
+{\bfseries STTS22\+H\+\_\+50\+Hz} = 0x12
+, {\bfseries STTS22\+H\+\_\+100\+Hz} = 0x22
+, {\bfseries STTS22\+H\+\_\+200\+Hz} = 0x32
+ \}
+\item 
+\Hypertarget{group___s_t_t_s22_h_ga5fe2ed67f308b23a920b03d8c80bad39}\label{group___s_t_t_s22_h_ga5fe2ed67f308b23a920b03d8c80bad39} 
+enum {\bfseries stts22h\+\_\+smbus\+\_\+md\+\_\+t} \{ {\bfseries STTS22\+H\+\_\+\+SMBUS\+\_\+\+TIMEOUT\+\_\+\+ENABLE} = 0
+, {\bfseries STTS22\+H\+\_\+\+SMBUS\+\_\+\+TIMEOUT\+\_\+\+DISABLE} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga5edac1c4668284e7e0a37e501ba94d12}{stts22h\+\_\+read\+\_\+reg}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t reg, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Read generic device register. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga5a97fe6df47e55f11546659f98087de4}{stts22h\+\_\+write\+\_\+reg}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t reg, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Write generic device register. \end{DoxyCompactList}\item 
+\Hypertarget{group___s_t_t_s22_h_gaea20bf7246e2eb3b8862328a937b0f29}\label{group___s_t_t_s22_h_gaea20bf7246e2eb3b8862328a937b0f29} 
+float\+\_\+t {\bfseries stts22h\+\_\+from\+\_\+lsb\+\_\+to\+\_\+celsius} (int16\+\_\+t lsb)
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga177a3f64394831b136a1fd20aa038590}{stts22h\+\_\+temp\+\_\+data\+\_\+rate\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+odr\+\_\+temp\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Temperature sensor data rate selection..\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga4f6c130ddd2446a76c9b0ef288ebd65a}{stts22h\+\_\+temp\+\_\+data\+\_\+rate\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+odr\+\_\+temp\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Temperature sensor data rate selection..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_gaf04b7b13131b608e3d8abc2c00a0d82d}{stts22h\+\_\+block\+\_\+data\+\_\+update\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Block data update.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_gaf415b9ee64bdb433433b638d6104a5e2}{stts22h\+\_\+block\+\_\+data\+\_\+update\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Block data update.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga9b5805d3060177e5ff8d69568a80f58f}{stts22h\+\_\+temp\+\_\+flag\+\_\+data\+\_\+ready\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em New data available from temperature sensor..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga47bc4d9c86c7295e1fa711eaddc45fb6}{stts22h\+\_\+temperature\+\_\+raw\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, int16\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Temperature data output register(r). L and H registers together express a 16-\/bit word in two’s complement..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga17f3aef0e0536f105ecaba9e81bb445e}{stts22h\+\_\+dev\+\_\+id\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff)
+\begin{DoxyCompactList}\small\item\em Device Who am I..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga579e7e7283e9f236338b233020fd21ba}{stts22h\+\_\+dev\+\_\+status\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, \mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\+\_\+dev\+\_\+status\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Device status register.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_gae8bb6303548bab5c8502c5be4861d52e}{stts22h\+\_\+smbus\+\_\+interface\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+smbus\+\_\+md\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em SMBus mode..\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga783070cd24f37626994dc238a0737357}{stts22h\+\_\+smbus\+\_\+interface\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+smbus\+\_\+md\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em SMBus mode..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga6273dff080b0a88b16ac59079b7d8b9b}{stts22h\+\_\+auto\+\_\+increment\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga6c435cd30e5e712a045c7b31b4e09cf6}{stts22h\+\_\+auto\+\_\+increment\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga8140a98a8c70ef89af857cc8b613b7d2}{stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_gaa180d84ef258a6236b573e36f63a7b21}{stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga42ee9e8794733fbb426cd9917a6809e3}{stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_ga8c48d6d7787994e1122280146427c980}{stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h_gac1c2522b550bb62d7254fd7c4ddb59d3}{stts22h\+\_\+temp\+\_\+trshld\+\_\+src\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, \mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\+\_\+temp\+\_\+trlhd\+\_\+src\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Temperature interrupt on threshold source.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides a set of functions needed to drive the stts22h enhanced inertial module. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group___s_t_t_s22_h_ga6c435cd30e5e712a045c7b31b4e09cf6}\index{STTS22H@{STTS22H}!stts22h\_auto\_increment\_get@{stts22h\_auto\_increment\_get}}
+\index{stts22h\_auto\_increment\_get@{stts22h\_auto\_increment\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_auto\_increment\_get()}{stts22h\_auto\_increment\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga6c435cd30e5e712a045c7b31b4e09cf6} 
+int32\+\_\+t stts22h\+\_\+auto\+\_\+increment\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of if\+\_\+add\+\_\+inc in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga6273dff080b0a88b16ac59079b7d8b9b}\index{STTS22H@{STTS22H}!stts22h\_auto\_increment\_set@{stts22h\_auto\_increment\_set}}
+\index{stts22h\_auto\_increment\_set@{stts22h\_auto\_increment\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_auto\_increment\_set()}{stts22h\_auto\_increment\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga6273dff080b0a88b16ac59079b7d8b9b} 
+int32\+\_\+t stts22h\+\_\+auto\+\_\+increment\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of "{}if\+\_\+add\+\_\+inc"{} in reg STTS22H. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_gaf415b9ee64bdb433433b638d6104a5e2}\index{STTS22H@{STTS22H}!stts22h\_block\_data\_update\_get@{stts22h\_block\_data\_update\_get}}
+\index{stts22h\_block\_data\_update\_get@{stts22h\_block\_data\_update\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_block\_data\_update\_get()}{stts22h\_block\_data\_update\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_gaf415b9ee64bdb433433b638d6104a5e2} 
+int32\+\_\+t stts22h\+\_\+block\+\_\+data\+\_\+update\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Block data update.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of bdu in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_gaf04b7b13131b608e3d8abc2c00a0d82d}\index{STTS22H@{STTS22H}!stts22h\_block\_data\_update\_set@{stts22h\_block\_data\_update\_set}}
+\index{stts22h\_block\_data\_update\_set@{stts22h\_block\_data\_update\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_block\_data\_update\_set()}{stts22h\_block\_data\_update\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_gaf04b7b13131b608e3d8abc2c00a0d82d} 
+int32\+\_\+t stts22h\+\_\+block\+\_\+data\+\_\+update\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Block data update.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of bdu in reg CTRL. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga17f3aef0e0536f105ecaba9e81bb445e}\index{STTS22H@{STTS22H}!stts22h\_dev\_id\_get@{stts22h\_dev\_id\_get}}
+\index{stts22h\_dev\_id\_get@{stts22h\_dev\_id\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_dev\_id\_get()}{stts22h\_dev\_id\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga17f3aef0e0536f105ecaba9e81bb445e} 
+int32\+\_\+t stts22h\+\_\+dev\+\_\+id\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{}\end{DoxyParamCaption})}
+
+
+
+Device Who am I..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em buff} & Buffer that stores the data read.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga579e7e7283e9f236338b233020fd21ba}\index{STTS22H@{STTS22H}!stts22h\_dev\_status\_get@{stts22h\_dev\_status\_get}}
+\index{stts22h\_dev\_status\_get@{stts22h\_dev\_status\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_dev\_status\_get()}{stts22h\_dev\_status\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga579e7e7283e9f236338b233020fd21ba} 
+int32\+\_\+t stts22h\+\_\+dev\+\_\+status\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{\mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\+\_\+dev\+\_\+status\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Device status register.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & In one-\/shot mode this bit is high when the conversion is in progress..(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga5edac1c4668284e7e0a37e501ba94d12}\index{STTS22H@{STTS22H}!stts22h\_read\_reg@{stts22h\_read\_reg}}
+\index{stts22h\_read\_reg@{stts22h\_read\_reg}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_read\_reg()}{stts22h\_read\_reg()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga5edac1c4668284e7e0a37e501ba94d12} 
+int32\+\_\+t stts22h\+\_\+read\+\_\+reg (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{reg}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Read generic device register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & read / write interface definitions(ptr) \\
+\hline
+{\em reg} & register to read \\
+\hline
+{\em data} & pointer to buffer that store the data read(ptr) \\
+\hline
+{\em len} & number of consecutive register to read \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error) \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga783070cd24f37626994dc238a0737357}\index{STTS22H@{STTS22H}!stts22h\_smbus\_interface\_get@{stts22h\_smbus\_interface\_get}}
+\index{stts22h\_smbus\_interface\_get@{stts22h\_smbus\_interface\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_smbus\_interface\_get()}{stts22h\_smbus\_interface\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga783070cd24f37626994dc238a0737357} 
+int32\+\_\+t stts22h\+\_\+smbus\+\_\+interface\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+smbus\+\_\+md\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+SMBus mode..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of time\+\_\+out\+\_\+dis in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_gae8bb6303548bab5c8502c5be4861d52e}\index{STTS22H@{STTS22H}!stts22h\_smbus\_interface\_set@{stts22h\_smbus\_interface\_set}}
+\index{stts22h\_smbus\_interface\_set@{stts22h\_smbus\_interface\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_smbus\_interface\_set()}{stts22h\_smbus\_interface\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_gae8bb6303548bab5c8502c5be4861d52e} 
+int32\+\_\+t stts22h\+\_\+smbus\+\_\+interface\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+smbus\+\_\+md\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+SMBus mode..\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of "{}time\+\_\+out\+\_\+dis"{} in reg STTS22H. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga4f6c130ddd2446a76c9b0ef288ebd65a}\index{STTS22H@{STTS22H}!stts22h\_temp\_data\_rate\_get@{stts22h\_temp\_data\_rate\_get}}
+\index{stts22h\_temp\_data\_rate\_get@{stts22h\_temp\_data\_rate\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_data\_rate\_get()}{stts22h\_temp\_data\_rate\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga4f6c130ddd2446a76c9b0ef288ebd65a} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+data\+\_\+rate\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+odr\+\_\+temp\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature sensor data rate selection..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of one\+\_\+shot in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga177a3f64394831b136a1fd20aa038590}\index{STTS22H@{STTS22H}!stts22h\_temp\_data\_rate\_set@{stts22h\_temp\_data\_rate\_set}}
+\index{stts22h\_temp\_data\_rate\_set@{stts22h\_temp\_data\_rate\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_data\_rate\_set()}{stts22h\_temp\_data\_rate\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga177a3f64394831b136a1fd20aa038590} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+data\+\_\+rate\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+odr\+\_\+temp\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature sensor data rate selection..\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of "{}one\+\_\+shot"{} in reg STTS22H. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga9b5805d3060177e5ff8d69568a80f58f}\index{STTS22H@{STTS22H}!stts22h\_temp\_flag\_data\_ready\_get@{stts22h\_temp\_flag\_data\_ready\_get}}
+\index{stts22h\_temp\_flag\_data\_ready\_get@{stts22h\_temp\_flag\_data\_ready\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_flag\_data\_ready\_get()}{stts22h\_temp\_flag\_data\_ready\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga9b5805d3060177e5ff8d69568a80f58f} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+flag\+\_\+data\+\_\+ready\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+New data available from temperature sensor..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Return an option of "{}stts22h\+\_\+uint8\+\_\+t"{}.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_gaa180d84ef258a6236b573e36f63a7b21}\index{STTS22H@{STTS22H}!stts22h\_temp\_trshld\_high\_get@{stts22h\_temp\_trshld\_high\_get}}
+\index{stts22h\_temp\_trshld\_high\_get@{stts22h\_temp\_trshld\_high\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_high\_get()}{stts22h\_temp\_trshld\_high\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_gaa180d84ef258a6236b573e36f63a7b21} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of thl in reg TEMP\+\_\+\+H\+\_\+\+LIMIT.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga8140a98a8c70ef89af857cc8b613b7d2}\index{STTS22H@{STTS22H}!stts22h\_temp\_trshld\_high\_set@{stts22h\_temp\_trshld\_high\_set}}
+\index{stts22h\_temp\_trshld\_high\_set@{stts22h\_temp\_trshld\_high\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_high\_set()}{stts22h\_temp\_trshld\_high\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga8140a98a8c70ef89af857cc8b613b7d2} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of thl in reg TEMP\+\_\+\+H\+\_\+\+LIMIT. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga8c48d6d7787994e1122280146427c980}\index{STTS22H@{STTS22H}!stts22h\_temp\_trshld\_low\_get@{stts22h\_temp\_trshld\_low\_get}}
+\index{stts22h\_temp\_trshld\_low\_get@{stts22h\_temp\_trshld\_low\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_low\_get()}{stts22h\_temp\_trshld\_low\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga8c48d6d7787994e1122280146427c980} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of tll in reg TEMP\+\_\+\+L\+\_\+\+LIMIT.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga42ee9e8794733fbb426cd9917a6809e3}\index{STTS22H@{STTS22H}!stts22h\_temp\_trshld\_low\_set@{stts22h\_temp\_trshld\_low\_set}}
+\index{stts22h\_temp\_trshld\_low\_set@{stts22h\_temp\_trshld\_low\_set}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_low\_set()}{stts22h\_temp\_trshld\_low\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga42ee9e8794733fbb426cd9917a6809e3} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of tll in reg TEMP\+\_\+\+L\+\_\+\+LIMIT. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_gac1c2522b550bb62d7254fd7c4ddb59d3}\index{STTS22H@{STTS22H}!stts22h\_temp\_trshld\_src\_get@{stts22h\_temp\_trshld\_src\_get}}
+\index{stts22h\_temp\_trshld\_src\_get@{stts22h\_temp\_trshld\_src\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_src\_get()}{stts22h\_temp\_trshld\_src\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_gac1c2522b550bb62d7254fd7c4ddb59d3} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+src\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{\mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\+\_\+temp\+\_\+trlhd\+\_\+src\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature interrupt on threshold source.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Low limit temperature exceeded..(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga47bc4d9c86c7295e1fa711eaddc45fb6}\index{STTS22H@{STTS22H}!stts22h\_temperature\_raw\_get@{stts22h\_temperature\_raw\_get}}
+\index{stts22h\_temperature\_raw\_get@{stts22h\_temperature\_raw\_get}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_temperature\_raw\_get()}{stts22h\_temperature\_raw\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga47bc4d9c86c7295e1fa711eaddc45fb6} 
+int32\+\_\+t stts22h\+\_\+temperature\+\_\+raw\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{int16\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature data output register(r). L and H registers together express a 16-\/bit word in two’s complement..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em buff} & Buffer that stores the data read.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h_ga5a97fe6df47e55f11546659f98087de4}\index{STTS22H@{STTS22H}!stts22h\_write\_reg@{stts22h\_write\_reg}}
+\index{stts22h\_write\_reg@{stts22h\_write\_reg}!STTS22H@{STTS22H}}
+\doxysubsubsection{\texorpdfstring{stts22h\_write\_reg()}{stts22h\_write\_reg()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h_ga5a97fe6df47e55f11546659f98087de4} 
+int32\+\_\+t stts22h\+\_\+write\+\_\+reg (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{reg}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Write generic device register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & read / write interface definitions(ptr) \\
+\hline
+{\em reg} & register to write \\
+\hline
+{\em data} & pointer to data to write in register reg(ptr) \\
+\hline
+{\em len} & number of consecutive register to write \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error) \\
+\hline
+\end{DoxyRetVals}
+\input{group___s_t_t_s22_h___interfaces___functions}
+\input{group___s_t_t_s22_h___sensitivity}
+\input{group___s_t_t_s22_h___data__generation}
+\input{group___s_t_t_s22_h___dataoutput}
+\input{group___s_t_t_s22_h___common}
+\input{group___s_t_t_s22_h___serial__interface}
+\input{group___s_t_t_s22_h__}
+\input{group___endianness}
+\input{group___s_t_microelectronics}
+\input{group___s_t_t_s22_h___infos}
+\input{group___s_t_t_s22_h___register___union}

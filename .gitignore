@@ -77,7 +77,6 @@
 **/Exe/
 
 # AC6 specific files
-**/.settings/
 **/*.launch
 **/out/
 

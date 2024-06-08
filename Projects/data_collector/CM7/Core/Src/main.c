@@ -21,12 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Sensor/stts22h_reg.h"
+#include "Sensor/iis3dwb_reg.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -40,7 +40,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define    BOOT_TIME        10 //ms
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -52,7 +52,6 @@ I2C_HandleTypeDef hi2c2;
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,6 +61,23 @@ static void MX_I2C2_Init(void);
 static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
 
+//SPI
+static int32_t platform_write_SPI(void *handle, uint8_t reg, const uint8_t *bufp,
+                              uint16_t len);
+static int32_t platform_read_SPI(void *handle, uint8_t reg, uint8_t *bufp,
+                             uint16_t len);
+static uint8_t whoamI_SPI, rst;
+static int16_t data_raw_acceleration[3];
+static int16_t data_raw_temperature;
+static float acceleration_mg[3];
+static float temperature_degC;
+static uint8_t tx_buffer[1000];
+
+//I2C
+//static uint8_t whoamI_I2C;
+
+//All usages
+static void platform_delay(uint32_t ms);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -77,68 +93,47 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
-/* USER CODE BEGIN Boot_Mode_Sequence_0 */
-  int32_t timeout;
-/* USER CODE END Boot_Mode_Sequence_0 */
+  /* USER CODE BEGIN Boot_Mode_Sequence_0 */
+  /* USER CODE END Boot_Mode_Sequence_0 */
 
-/* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /* Wait until CPU2 boots and enters in stop mode or timeout*/
-  timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
-  if ( timeout < 0 )
-  {
-  Error_Handler();
-  }
-/* USER CODE END Boot_Mode_Sequence_1 */
+  /* USER CODE BEGIN Boot_Mode_Sequence_1 */
+    /* Wait until CPU2 boots and enters in stop mode or timeout*/
+    int32_t timeout;
+    timeout = 0xFFFF;
+    while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
+    if ( timeout < 0 )
+    {
+    Error_Handler();
+    }
+  /* USER CODE END Boot_Mode_Sequence_1 */
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  //STTS22H SENSOR INIT
-  HAL_Delay(500);
-  BSP_LED_Off(LED_RED);
-  BSP_LED_Off(LED_GREEN);
-  BSP_LED_Off(LED_YELLOW);
-  STTS22H tempSensor;
-  tempSensor.i2c_handle = &hi2c2;
-  tempSensor.address = STTS22H_ADDRESS; //from STTS22H.h
-
-  if(STTS22H_Initialize(&tempSensor)){
-	  //INDICATE TEMP SENSOR IS ONB
-	  BSP_LED_On(LED_YELLOW);
-	  //printf("[INFO] SSTS22H (TEMP) is initialised\r\n");
-  } else {
-	  BSP_LED_Off(LED_YELLOW);
-	  BSP_LED_On(LED_RED);
-	  //printf("[ERROR] SSTS22H (TEMP) an ERROR was when initialising sensor\r\n");
-  }
-
-  //VIBRATOR SENSOR INIT
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-/* USER CODE BEGIN Boot_Mode_Sequence_2 */
-/* When system initialization is finished, Cortex-M7 will release Cortex-M4 by means of
-HSEM notification */
-/*HW semaphore Clock enable*/
-__HAL_RCC_HSEM_CLK_ENABLE();
-/*Take HSEM */
-HAL_HSEM_FastTake(HSEM_ID_0);
-/*Release HSEM in order to notify the CPU2(CM4)*/
-HAL_HSEM_Release(HSEM_ID_0,0);
-/* wait until CPU2 wakes up from stop mode */
-timeout = 0xFFFF;
-while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-if ( timeout < 0 )
-{
-Error_Handler();
-}
-/* USER CODE END Boot_Mode_Sequence_2 */
+  /* USER CODE BEGIN Boot_Mode_Sequence_2 */
+  /* When system initialization is finished, Cortex-M7 will release Cortex-M4 by means of
+  HSEM notification */
+  /*HW semaphore Clock enable*/
+  __HAL_RCC_HSEM_CLK_ENABLE();
+  /*Take HSEM */
+  HAL_HSEM_FastTake(HSEM_ID_0);
+  /*Release HSEM in order to notify the CPU2(CM4)*/
+  HAL_HSEM_Release(HSEM_ID_0,0);
+  /* wait until CPU2 wakes up from stop mode */
+  timeout = 0xFFFF;
+  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
+  if ( timeout < 0 )
+  {
+  Error_Handler();
+  }
+  /* USER CODE END Boot_Mode_Sequence_2 */
 
   /* USER CODE BEGIN SysInit */
 
@@ -149,7 +144,8 @@ Error_Handler();
   MX_I2C2_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  GPIOA->BSRR = (1U << 4); //!!!ENABLE CC PIN FROM START!!!!
+  HAL_Delay(100);
   /* USER CODE END 2 */
 
   /* Initialize leds */
@@ -173,8 +169,82 @@ Error_Handler();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+
+  //-----INIT STTS22H------
+  //STTS22H VARIBELS
+  //stmdev_ctx_t dev_ctx_STTS22H;
+
+
+  //-----INIT IIS3DWB------
+  //IIS3DWB VARIBELS
+  stmdev_ctx_t dev_ctx_IIS3DWB;
+  dev_ctx_IIS3DWB.write_reg = platform_write_SPI;
+  dev_ctx_IIS3DWB.read_reg = platform_read_SPI;
+  dev_ctx_IIS3DWB.mdelay = platform_delay;
+  dev_ctx_IIS3DWB.handle = &hspi1;
+
+
+  //delay
+  platform_delay(BOOT_TIME);
+
+  //check communcation
+  iis3dwb_device_id_get(&dev_ctx_IIS3DWB, &whoamI_SPI);
+
+    if (whoamI_SPI != IIS3DWB_ID)
+      while (1);
+
+  /* Restore default configuration */
+  iis3dwb_reset_set(&dev_ctx_IIS3DWB, PROPERTY_ENABLE);
+
+  do {
+      iis3dwb_reset_get(&dev_ctx_IIS3DWB, &rst);
+  } while (rst);
+
+  /* Enable Block Data Update */
+  iis3dwb_block_data_update_set(&dev_ctx_IIS3DWB, PROPERTY_ENABLE);
+  /* Set Output Data Rate */
+  iis3dwb_xl_data_rate_set(&dev_ctx_IIS3DWB, IIS3DWB_XL_ODR_26k7Hz);
+  /* Set full scale */
+  iis3dwb_xl_full_scale_set(&dev_ctx_IIS3DWB, IIS3DWB_2g);
+  /* Configure filtering chain(No aux interface)
+   * Accelerometer low pass filter path
+   */
+  iis3dwb_xl_filt_path_on_out_set(&dev_ctx_IIS3DWB, IIS3DWB_LP_ODR_DIV_100);
+
+
+  while(1)
   {
+      uint8_t reg;
+      /* Read output only if new xl value is available */
+      iis3dwb_xl_flag_data_ready_get(&dev_ctx_IIS3DWB, &reg);
+
+      if (reg) {
+        /* Read acceleration field data */
+        memset(data_raw_acceleration, 0x00, 3 * sizeof(int16_t));
+        iis3dwb_acceleration_raw_get(&dev_ctx_IIS3DWB, data_raw_acceleration);
+        acceleration_mg[0] =
+          iis3dwb_from_fs2g_to_mg(data_raw_acceleration[0]);
+        acceleration_mg[1] =
+          iis3dwb_from_fs2g_to_mg(data_raw_acceleration[1]);
+        acceleration_mg[2] =
+          iis3dwb_from_fs2g_to_mg(data_raw_acceleration[2]);
+        sprintf((char *)tx_buffer,
+                "Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n",
+                acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
+        printf("%s", (char *)tx_buffer);
+      }
+
+      iis3dwb_temp_flag_data_ready_get(&dev_ctx_IIS3DWB, &reg);
+
+      if (reg) {
+        /* Read temperature data */
+        memset(&data_raw_temperature, 0x00, sizeof(int16_t));
+        iis3dwb_temperature_raw_get(&dev_ctx_IIS3DWB, &data_raw_temperature);
+        temperature_degC = iis3dwb_from_lsb_to_celsius(data_raw_temperature);
+        sprintf((char *)tx_buffer,
+                "Temperature [degC]:%6.2f\r\n", temperature_degC);
+        printf("%s", (char *)tx_buffer);
+      }
 
     /* USER CODE END WHILE */
 
@@ -198,25 +268,25 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_CSI;
+  RCC_OscInitStruct.CSIState = RCC_CSI_ON;
+  RCC_OscInitStruct.CSICalibrationValue = RCC_CSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 10;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_CSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 200;
   RCC_OscInitStruct.PLL.PLLP = 2;
-  RCC_OscInitStruct.PLL.PLLQ = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   RCC_OscInitStruct.PLL.PLLR = 2;
-  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
-  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOMEDIUM;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
+  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -230,13 +300,13 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV1;
-  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -258,7 +328,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x00909BEB;
+  hi2c2.Init.Timing = 0x00C0EAFF;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -313,12 +383,12 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi1.Init.CRCPolynomial = 0x0;
-  hspi1.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
   hspi1.Init.NSSPolarity = SPI_NSS_POLARITY_LOW;
   hspi1.Init.FifoThreshold = SPI_FIFO_THRESHOLD_01DATA;
   hspi1.Init.TxCRCInitializationPattern = SPI_CRC_INITIALIZATION_ALL_ZERO_PATTERN;
@@ -355,6 +425,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+
   /*Configure GPIO pins : PC1 PC4 PC5 */
   GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -369,6 +442,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB13 */
@@ -400,6 +480,41 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+ * @brief  Write generic device register (platform dependent).
+ */
+static int32_t platform_write_SPI(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
+{
+    GPIOA->BSRR = (1U << (4 + 16));  // Reset PA4
+    HAL_SPI_Transmit((SPI_HandleTypeDef*)handle, &reg, 1, HAL_MAX_DELAY);
+    HAL_SPI_Transmit((SPI_HandleTypeDef*)handle, (uint8_t*)bufp, len, HAL_MAX_DELAY);
+    GPIOA->BSRR = (1U << 4);  // Set PA4
+
+    return 0;
+}
+
+/**
+ * @brief  Read generic device register (platform dependent).
+ */
+static int32_t platform_read_SPI(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+{
+    reg |= 0x80; // Multi-byte read bit for SPI
+
+    GPIOA->BSRR = (1U << (4 + 16));  // Reset PA4
+    HAL_SPI_Transmit((SPI_HandleTypeDef*)handle, &reg, 1, HAL_MAX_DELAY);
+    HAL_SPI_Receive((SPI_HandleTypeDef*)handle, bufp, len, HAL_MAX_DELAY);
+    GPIOA->BSRR = (1U << 4);  // Set PA4
+
+    return 0;
+}
+
+/**
+ * @brief  Platform specific delay (platform dependent).
+ */
+static void platform_delay(uint32_t ms)
+{
+    HAL_Delay(ms);
+}
 
 /* USER CODE END 4 */
 
