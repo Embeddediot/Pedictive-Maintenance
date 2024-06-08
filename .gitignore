@@ -1,15 +1,4 @@
 # STM32CubeIDE specific files
-**/.cproject
-**/.project
-**/.settings/
-**/.metadata/
-**/.prefs/
-**/.ipr
-**/.iws
-**/.iml
-.DS_Store
-**/*.launch
-**/*.log
 
 # Compiled object files, libraries, executables
 **/*.o
