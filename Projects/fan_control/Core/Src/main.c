@@ -108,15 +108,16 @@ int main(void)
   // Start the encoder and PWM timers
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-
+/*
   SSD1306_GotoXY (10,10); // goto 10, 10
   SSD1306_Puts ("testing", &Font_7x10, 1); // print Hello
-  /*
+
   SSD1306_GotoXY (10, 30);
   SSD1306_Puts ("WORLD !!", &Font_11x18, 1);
   SSD1306_UpdateScreen(); // update screen
+  */
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL); //Start encoder timer
-*/
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,9 +151,9 @@ int main(void)
       SSD1306_Puts((char *)PWM_Speed, &Font_7x10, 1);
       SSD1306_UpdateScreen();
     /* USER CODE END WHILE */
-  }
-    /* USER CODE BEGIN 3 */
 
+    /* USER CODE BEGIN 3 */
+  }
   /* USER CODE END 3 */
 }
 
