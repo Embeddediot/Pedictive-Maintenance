@@ -1,0 +1,55 @@
+10:02:12 **** Build of configuration Debug for project 755_ai_test_CM7 ****
+make -j8 all 
+arm-none-eabi-gcc "../X-CUBE-AI/App/aiSystemPerformance.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/aiSystemPerformance.d" -MT"X-CUBE-AI/App/aiSystemPerformance.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/aiSystemPerformance.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/aiTestHelper.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/aiTestHelper.d" -MT"X-CUBE-AI/App/aiTestHelper.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/aiTestHelper.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/aiTestUtility.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/aiTestUtility.d" -MT"X-CUBE-AI/App/aiTestUtility.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/aiTestUtility.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/app_x-cube-ai.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/app_x-cube-ai.d" -MT"X-CUBE-AI/App/app_x-cube-ai.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/app_x-cube-ai.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/lc_print.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/lc_print.d" -MT"X-CUBE-AI/App/lc_print.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/lc_print.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/network.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/network.d" -MT"X-CUBE-AI/App/network.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/network.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/network_data.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/network_data.d" -MT"X-CUBE-AI/App/network_data.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/network_data.o"
+arm-none-eabi-gcc "../X-CUBE-AI/App/syscalls.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../X-CUBE-AI/App -I../X-CUBE-AI -I../X-CUBE-AI/Target -I../../Middlewares/ST/AI/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"X-CUBE-AI/App/syscalls.d" -MT"X-CUBE-AI/App/syscalls.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "X-CUBE-AI/App/syscalls.o"
+In file included from ../X-CUBE-AI/App/network.c:20:
+../X-CUBE-AI/App/network.h:26:10: fatal error: ai_platform.h: No such file or directory
+   26 | #include "ai_platform.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/network.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../X-CUBE-AI/App/aiTestHelper.c:35:
+../X-CUBE-AI/App/aiTestHelper.h:26:10: fatal error: ai_platform.h: No such file or directory
+   26 | #include <ai_platform.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+In file included from ../X-CUBE-AI/App/app_x-cube-ai.c:37:
+../X-CUBE-AI/App/app_x-cube-ai.h:26:10: fatal error: ai_platform.h: No such file or directory
+   26 | #include "ai_platform.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/aiTestHelper.o] Error 1
+In file included from ../X-CUBE-AI/App/network_data.c:19:
+../X-CUBE-AI/App/network_data.h:23:10: fatal error: ai_platform.h: No such file or directory
+   23 | #include "ai_platform.h"
+      |          ^~~~~~~~~~~~~~~
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/app_x-cube-ai.o] Error 1
+compilation terminated.
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/network_data.o] Error 1
+In file included from ../X-CUBE-AI/Target/bsp_ai.h:26,
+                 from ../X-CUBE-AI/App/aiTestUtility.h:26,
+                 from ../X-CUBE-AI/App/aiSystemPerformance.c:98:
+../X-CUBE-AI/App/app_x-cube-ai.h:26:10: fatal error: ai_platform.h: No such file or directory
+   26 | #include "ai_platform.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+In file included from ../X-CUBE-AI/Target/bsp_ai.h:26,
+                 from ../X-CUBE-AI/App/aiTestUtility.h:26,
+                 from ../X-CUBE-AI/App/aiTestUtility.c:74:
+../X-CUBE-AI/App/app_x-cube-ai.h:26:10: fatal error: ai_platform.h: No such file or directory
+   26 | #include "ai_platform.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/aiSystemPerformance.o] Error 1
+make: *** [X-CUBE-AI/App/subdir.mk:40: X-CUBE-AI/App/aiTestUtility.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+
+10:02:13 Build Failed. 13 errors, 0 warnings. (took 858ms)
+
