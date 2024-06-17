@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fft import fft, fftfreq
 import csv
+import threading
 
 class StatAnalysis:
     def __init__(self, port='COM6', baudrate=115200):
@@ -12,44 +13,54 @@ class StatAnalysis:
         self.baudrate = baudrate
         self.data = []
         self.ser = None
+        self.recording_thread = None
 
     def open_port(self):
         self.ser = serial.Serial(self.port, self.baudrate)
         time.sleep(2)  # Wait for the serial connection to initialize
 
     def record_data(self, duration):
-        start_time = time.time()
-        self.data = []
-        timestampOld = 0
+        def record():
+            start_time = time.time()
+            self.data = []
+            timestampOld = 0
 
-        print("Flushing buffers..")
-        self.ser.flush()
-        self.ser.reset_input_buffer()
+            print("Flushing buffers..")
+            self.ser.flush()
+            self.ser.reset_input_buffer()
 
-        while time.time() - start_time < duration:
-            if self.ser.in_waiting > 0:
-                line = self.ser.readline().decode('utf-8')
-                line = line.replace('\x00', '')  # Remove null characters
-                if not line:  # Skip empty lines
-                    continue
-                parts = line.split()
-                if len(parts) == 4:
-                    timestamp, x, y, z = parts
-                    try:
-                        self.data.append([int(timestamp), float(x), float(y), float(z)])
-                        if (int(timestamp) - int(timestampOld)) > 20000:
-                            print("-------ERROR------")
-                            print(timestampOld)
-                            print(timestamp)
-                            print([int(timestamp), float(x), float(y), float(z)])
-                            print("------------------")
-                        timestampOld = timestamp
-                    except ValueError:
-                        print("ValueError")
-                        pass
+            while time.time() - start_time < duration:
+                if self.ser.in_waiting > 0:
+                    line = self.ser.readline()
+                    line = line.decode('utf-8')
+                    line = line.replace('\x00', '')  # Remove null characters
+                    if not line:  # Skip empty lines
+                        continue
+                    parts = line.split()
+                    if len(parts) == 4:
+                        timestamp, x, y, z = parts
+                        try:
+                            self.data.append([int(timestamp), float(x), float(y), float(z)])
+                            if (int(timestamp) - int(timestampOld)) > 20000:
+                                print("-------ERROR------")
+                                print(timestampOld)
+                                print(timestamp)
+                                print([int(timestamp), float(x), float(y), float(z)])
+                                print("------------------")
+                            timestampOld = timestamp
+                        except ValueError:
+                            print("ValueError")
+                            pass
 
-        self.data = np.array(self.data)
-        self.data = self.data[1:]  # Discard the first sample
+            self.data = np.array(self.data)
+            self.data = self.data[1:]  # Discard the first sample
+
+        self.recording_thread = threading.Thread(target=record)
+        self.recording_thread.start()
+
+    def wait_for_recording(self):
+        if self.recording_thread:
+            self.recording_thread.join()
 
     def calculate_frame_frequency(self):
         timestamps = self.data[:, 0]
@@ -110,17 +121,20 @@ class StatAnalysis:
 
 # Usage Example
 if __name__ == "__main__":
-    duration = 300  # Recording duration in seconds
+    duration = 60  # Recording duration in seconds
     
     save_folder = 'fail_100'
     print("STARTING RECORDING")
     stat_analysis = StatAnalysis()
     stat_analysis.open_port()
     stat_analysis.record_data(duration)
+    stat_analysis.wait_for_recording()
+    
     frame_frequency = stat_analysis.calculate_frame_frequency()
     print(f'Frame Frequency: {frame_frequency} Hz')
 
     stat_analysis.ensure_folder_exists(save_folder)
     stat_analysis.plot_data(save_folder)
-    stat_analysis.save_to_csv(os.path.join(save_folder, 'output.csv'))
+    output_filename = save_folder + '.csv'
+    stat_analysis.save_to_csv(os.path.join(save_folder, output_filename))
     stat_analysis.close_port()

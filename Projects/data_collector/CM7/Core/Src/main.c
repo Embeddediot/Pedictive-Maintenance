@@ -82,7 +82,8 @@ static int16_t data_raw_acceleration[3];
 static int16_t data_raw_temperature;
 static float acceleration_mg[3];
 static float temperature_degC;
-static uint8_t tx_buffer[50];
+
+static uint8_t tx_buffer[64];
 
 static float offset[3];
 static int16_t data_raw_offset[3];
@@ -308,6 +309,7 @@ int main(void)
   }
 
   HAL_TIM_Base_Start(&htim2);
+
   while(1)
   {
       uint8_t reg;
@@ -332,7 +334,9 @@ int main(void)
         sprintf((char *)tx_buffer,
                 "%lu\t%4.2f\t%4.2f\t%4.2f\t\r\n",ticks,
                 acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
-        CDC_Transmit_FS(tx_buffer,sizeof(tx_buffer)-1);
+        size_t length = strlen((char *)tx_buffer);
+
+        CDC_Transmit_FS(tx_buffer, length);
         GPIOB->BSRR = GPIO_BSRR_BR0; //DEBUG
 
         /*sprintf((char *)tx_buffer,
