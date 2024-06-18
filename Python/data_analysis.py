@@ -68,7 +68,7 @@ class StatAnalysis:
         frame_frequency = 1000 / np.mean(time_diffs)  # Convert to Hz
         return frame_frequency
 
-    def plot_data(self, save_folder):
+    def plot_data(self, save_folder, plot_filename):
         timestamps = self.data[:, 0]
         x = self.data[:, 1]
         y = self.data[:, 2]
@@ -100,9 +100,9 @@ class StatAnalysis:
             axs[i, 1].legend()
 
         plt.tight_layout()
-        plot_filename = os.path.join(save_folder, 'plot.png')
-        plt.savefig(plot_filename)
-        plt.show()
+        plot_filepath = os.path.join(save_folder, plot_filename)
+        plt.savefig(plot_filepath)
+        #plt.show()
 
     def save_to_csv(self, filename):
         header = ['Timestamp (ms)', 'X', 'Y', 'Z']
@@ -121,20 +121,31 @@ class StatAnalysis:
 
 # Usage Example
 if __name__ == "__main__":
-    duration = 60  # Recording duration in seconds
+    duration = 150  # Recording duration in seconds 2.5min
+    save_folder = 'køkkenbord_150s'  # Change this folder name as needed
+    filenames = ['idle', 'normal_50', 'normal_100', 'blocked', 'fail_100']
     
-    save_folder = 'fail_100'
-    print("STARTING RECORDING")
     stat_analysis = StatAnalysis()
     stat_analysis.open_port()
-    stat_analysis.record_data(duration)
-    stat_analysis.wait_for_recording()
-    
-    frame_frequency = stat_analysis.calculate_frame_frequency()
-    print(f'Frame Frequency: {frame_frequency} Hz')
-
     stat_analysis.ensure_folder_exists(save_folder)
-    stat_analysis.plot_data(save_folder)
-    output_filename = save_folder + '.csv'
-    stat_analysis.save_to_csv(os.path.join(save_folder, output_filename))
+
+    for filename in filenames:
+        input(f"Press Enter to start recording for {filename}...")
+        print(f"STARTING RECORDING FOR {filename}")
+        
+        stat_analysis.record_data(duration)
+        stat_analysis.wait_for_recording()
+        
+        frame_frequency = stat_analysis.calculate_frame_frequency()
+        print(f'Frame Frequency: {frame_frequency} Hz')
+        
+        output_filename = f"{filename}.csv"
+        stat_analysis.save_to_csv(os.path.join(save_folder, output_filename))
+        
+        plot_filename = f"{filename}.png"
+        stat_analysis.plot_data(save_folder, plot_filename)
+        
+        print(f"Saved data to {output_filename} and plot to {plot_filename}")
+
     stat_analysis.close_port()
+    print("All recordings completed.")
