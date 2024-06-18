@@ -123,7 +123,7 @@ class StatAnalysis:
 if __name__ == "__main__":
     duration = 150  # Recording duration in seconds 2.5min
     save_folder = 'test_køkkenbord_150s'  # Change this folder name as needed
-    filenames = ['idle', 'normal_50', 'normal_100', 'blocked', 'fail_100']
+    filenames = ['fail_100']
     
     stat_analysis = StatAnalysis()
     stat_analysis.open_port()
