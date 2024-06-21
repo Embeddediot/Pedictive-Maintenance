@@ -5,13 +5,15 @@ import threading
 import queue
 from tensorflow.keras.models import load_model
 
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+print(os.getcwd())
 
 # Load your Keras model
-model = load_model('model.keras')
+# model = load_model('model.keras')
+model = load_model('C:/Users/uller/OneDrive - Danmarks Tekniske Universitet/Uni/Kandidat/Sommer semester/SpecialCourse/GIT/Pedictive-Maintenance/Python/model.keras')
+
 
 # Initialize the serial port
-ser = serial.Serial('COM6', 115200, timeout=1)
+ser = serial.Serial('COM3', 115200, timeout=1)
 
 # Thread-safe queue to hold the data for inference
 data_queue = queue.Queue()
