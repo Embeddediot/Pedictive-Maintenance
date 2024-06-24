@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test_CM7,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test2_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test2_CM7,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv3_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv3_CM7
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test_CM7,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test2_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:ai_test2_CM7,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv3_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv3_CM7,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv5_CM4,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:aiv5_CM7
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:H755_AI_TEST_CM4/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:H755_AI_TEST_CM4/activeLaunchTarget=null\:---
