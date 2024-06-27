@@ -191,7 +191,7 @@ Error_Handler();
   /* USER CODE BEGIN 2 */
 
   //Semaphore notifaction ENALBE
-  HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+  //HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
 
   //AI INIT ENABLE
   AI_Init();
