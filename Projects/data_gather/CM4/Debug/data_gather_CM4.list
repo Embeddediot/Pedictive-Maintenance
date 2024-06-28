@@ -289,6 +289,7 @@ int main(void)
   BSP_LED_Off(LED_YELLOW);
  810041c:	2001      	movs	r0, #1
  810041e:	f000 fa9b 	bl	8100958 <BSP_LED_Off>
+
   STTS22H tempSensor;
   tempSensor.i2c_handle = &hi2c2;
  8100422:	4b12      	ldr	r3, [pc, #72]	@ (810046c <main+0xd0>)
