@@ -1,0 +1,42 @@
+\doxysubsection{STTS22\+H\+\_\+\+Dataoutput}
+\hypertarget{group___s_t_t_s22_h___dataoutput}{}\label{group___s_t_t_s22_h___dataoutput}\index{STTS22H\_Dataoutput@{STTS22H\_Dataoutput}}
+
+
+This section groups all the data output functions.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___dataoutput_ga47bc4d9c86c7295e1fa711eaddc45fb6}{stts22h\+\_\+temperature\+\_\+raw\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, int16\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Temperature data output register(r). L and H registers together express a 16-\/bit word in two’s complement..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+This section groups all the data output functions. 
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___s_t_t_s22_h___dataoutput_ga47bc4d9c86c7295e1fa711eaddc45fb6}\index{STTS22H\_Dataoutput@{STTS22H\_Dataoutput}!stts22h\_temperature\_raw\_get@{stts22h\_temperature\_raw\_get}}
+\index{stts22h\_temperature\_raw\_get@{stts22h\_temperature\_raw\_get}!STTS22H\_Dataoutput@{STTS22H\_Dataoutput}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temperature\_raw\_get()}{stts22h\_temperature\_raw\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___dataoutput_ga47bc4d9c86c7295e1fa711eaddc45fb6} 
+int32\+\_\+t stts22h\+\_\+temperature\+\_\+raw\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{int16\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature data output register(r). L and H registers together express a 16-\/bit word in two’s complement..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em buff} & Buffer that stores the data read.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}

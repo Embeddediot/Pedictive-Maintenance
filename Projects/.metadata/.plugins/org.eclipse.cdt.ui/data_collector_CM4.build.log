@@ -1,0 +1,10 @@
+14:11:53 **** Incremental Build of configuration Debug for project data_collector_CM4 ****
+make -j4 all 
+arm-none-eabi-size  data_collector_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3148	     16	   1568	   4732	   127c	data_collector_CM4.elf
+Finished building: default.size.stdout
+ 
+
+14:11:54 Build Finished. 0 errors, 0 warnings. (took 847ms)
+

@@ -1,0 +1,71 @@
+\chapter{1 -\/ Introduction}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{1 -\/ Introduction@{1 -\/ Introduction}}
+\label{md__r_e_a_d_m_e_autotoc_md5}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md5}%
+ Sensor driver for STTS22H sensor written in C programming language. This repository contains the sensor driver files (.h and .c) to be included, or linked directly as a git submodule, in your project. The driver is MISRA compliant and the documentation can be generated using the \href{http://www.doxygen.org/}{\texttt{ Doxygen}} tool.
+
+In order to {\ttfamily clone} the complete content of the repository folder, use the command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/STMicroelectronics/STTS22H-\/PID/}
+
+\end{DoxyCode}
+
+
+Some examples of driver usage can be found \href{https://github.com/STMicroelectronics/STMems_Standard_C_drivers}{\texttt{ here}}.
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{\texorpdfstring{2 -\/ Integration details}{2 -\/ Integration details}}\label{md__r_e_a_d_m_e_autotoc_md7}
+The driver is platform-\/independent, you only need to define two functions for read and write transactions from the sensor hardware bus (ie. SPI or I²C). {\bfseries{A few devices integrate an extra bit in the communication protocol in order to enable multi read/write access, this bit must be managed in the read and write functions defined by the user.}} Please refer to the read and write implementation in the \href{https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/stts22h_STdC/examples}{\texttt{ reference examples}}.\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsubsection{\texorpdfstring{2.\+a Source code integration}{2.\+a Source code integration}}\label{md__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyItemize}
+\item Include in your project the driver files of the sensor (.h and .c)
+\item Define in your code the read and write functions that use the I²C or SPI platform driver like the following\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/**\ Please\ note\ that\ is\ MANDATORY:\ return\ 0\ -\/>\ no\ Error.**/}
+\DoxyCodeLine{int32\_t\ platform\_write(void\ *handle,\ uint8\_t\ Reg,\ const\ uint8\_t\ *Bufp,\ uint16\_t\ len)}
+\DoxyCodeLine{int32\_t\ platform\_read(void\ *handle,\ uint8\_t\ Reg,\ uint8\_t\ *Bufp,\ uint16\_t\ len)}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Declare and initialize the structure of the device interface\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{xxxxxxx\_ctx\_t\ dev\_ctx;\ /**\ xxxxxxx\ is\ the\ used\ part\ number\ **/}
+\DoxyCodeLine{dev\_ctx.write\_reg\ =\ platform\_write;}
+\DoxyCodeLine{dev\_ctx.read\_reg\ =\ platform\_read;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item If needed by the platform read and write functions, initialize the handle parameter\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{dev\_ctx.handle\ =\ \&platform\_handle;}
+
+\end{DoxyCode}
+
+
+Some integration examples can be found \href{https://github.com/STMicroelectronics/STMems_Standard_C_drivers/tree/master/stts22h_STdC/examples}{\texttt{ here}}.\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsubsection{\texorpdfstring{2.\+b Required properties}{2.\+b Required properties}}\label{md__r_e_a_d_m_e_autotoc_md9}
+\begin{quote}
+-\/ A standard C language compiler for the target MCU
+\begin{DoxyItemize}
+\item A C library for the target MCU and the desired interface (ie. SPI, I²C) 
+\end{DoxyItemize}\end{quote}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{}{}}\label{md__r_e_a_d_m_e_autotoc_md10}
+{\bfseries{More Information\+: \href{http://st.com/MEMS}{\texttt{ http\+://www.\+st.\+com}}}}
+
+{\bfseries{Copyright (C) 2021 STMicroelectronics}} 

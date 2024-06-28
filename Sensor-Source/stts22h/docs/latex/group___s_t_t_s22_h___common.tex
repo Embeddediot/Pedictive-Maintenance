@@ -1,0 +1,66 @@
+\doxysubsection{STTS22\+H\+\_\+\+Common}
+\hypertarget{group___s_t_t_s22_h___common}{}\label{group___s_t_t_s22_h___common}\index{STTS22H\_Common@{STTS22H\_Common}}
+
+
+This section groups common useful functions.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___common_ga17f3aef0e0536f105ecaba9e81bb445e}{stts22h\+\_\+dev\+\_\+id\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buff)
+\begin{DoxyCompactList}\small\item\em Device Who am I..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___common_ga579e7e7283e9f236338b233020fd21ba}{stts22h\+\_\+dev\+\_\+status\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, \mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\+\_\+dev\+\_\+status\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Device status register.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+This section groups common useful functions. 
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___s_t_t_s22_h___common_ga17f3aef0e0536f105ecaba9e81bb445e}\index{STTS22H\_Common@{STTS22H\_Common}!stts22h\_dev\_id\_get@{stts22h\_dev\_id\_get}}
+\index{stts22h\_dev\_id\_get@{stts22h\_dev\_id\_get}!STTS22H\_Common@{STTS22H\_Common}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_dev\_id\_get()}{stts22h\_dev\_id\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___common_ga17f3aef0e0536f105ecaba9e81bb445e} 
+int32\+\_\+t stts22h\+\_\+dev\+\_\+id\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buff}{}\end{DoxyParamCaption})}
+
+
+
+Device Who am I..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em buff} & Buffer that stores the data read.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___common_ga579e7e7283e9f236338b233020fd21ba}\index{STTS22H\_Common@{STTS22H\_Common}!stts22h\_dev\_status\_get@{stts22h\_dev\_status\_get}}
+\index{stts22h\_dev\_status\_get@{stts22h\_dev\_status\_get}!STTS22H\_Common@{STTS22H\_Common}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_dev\_status\_get()}{stts22h\_dev\_status\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___common_ga579e7e7283e9f236338b233020fd21ba} 
+int32\+\_\+t stts22h\+\_\+dev\+\_\+status\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{\mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\+\_\+dev\+\_\+status\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Device status register.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & In one-\/shot mode this bit is high when the conversion is in progress..(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}

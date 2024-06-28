@@ -1,0 +1,138 @@
+\doxysubsection{Interrupt\+\_\+on\+\_\+threshold}
+\hypertarget{group___s_t_t_s22_h__}{}\label{group___s_t_t_s22_h__}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+
+
+This section group all the functions concerning the interrupt on threshold configuration.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___ga8140a98a8c70ef89af857cc8b613b7d2}{stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___gaa180d84ef258a6236b573e36f63a7b21}{stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___ga42ee9e8794733fbb426cd9917a6809e3}{stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___ga8c48d6d7787994e1122280146427c980}{stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___gac1c2522b550bb62d7254fd7c4ddb59d3}{stts22h\+\_\+temp\+\_\+trshld\+\_\+src\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, \mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\+\_\+temp\+\_\+trlhd\+\_\+src\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Temperature interrupt on threshold source.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+This section group all the functions concerning the interrupt on threshold configuration. 
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___s_t_t_s22_h___gaa180d84ef258a6236b573e36f63a7b21}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}!stts22h\_temp\_trshld\_high\_get@{stts22h\_temp\_trshld\_high\_get}}
+\index{stts22h\_temp\_trshld\_high\_get@{stts22h\_temp\_trshld\_high\_get}!Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_high\_get()}{stts22h\_temp\_trshld\_high\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___gaa180d84ef258a6236b573e36f63a7b21} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of thl in reg TEMP\+\_\+\+H\+\_\+\+LIMIT.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___ga8140a98a8c70ef89af857cc8b613b7d2}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}!stts22h\_temp\_trshld\_high\_set@{stts22h\_temp\_trshld\_high\_set}}
+\index{stts22h\_temp\_trshld\_high\_set@{stts22h\_temp\_trshld\_high\_set}!Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_high\_set()}{stts22h\_temp\_trshld\_high\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___ga8140a98a8c70ef89af857cc8b613b7d2} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+high\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Over temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of thl in reg TEMP\+\_\+\+H\+\_\+\+LIMIT. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___ga8c48d6d7787994e1122280146427c980}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}!stts22h\_temp\_trshld\_low\_get@{stts22h\_temp\_trshld\_low\_get}}
+\index{stts22h\_temp\_trshld\_low\_get@{stts22h\_temp\_trshld\_low\_get}!Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_low\_get()}{stts22h\_temp\_trshld\_low\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___ga8c48d6d7787994e1122280146427c980} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of tll in reg TEMP\+\_\+\+L\+\_\+\+LIMIT.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___ga42ee9e8794733fbb426cd9917a6809e3}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}!stts22h\_temp\_trshld\_low\_set@{stts22h\_temp\_trshld\_low\_set}}
+\index{stts22h\_temp\_trshld\_low\_set@{stts22h\_temp\_trshld\_low\_set}!Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_low\_set()}{stts22h\_temp\_trshld\_low\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___ga42ee9e8794733fbb426cd9917a6809e3} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+low\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Under temperature interrupt value. ( degC / 0.\+64 ) + 63.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of tll in reg TEMP\+\_\+\+L\+\_\+\+LIMIT. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___gac1c2522b550bb62d7254fd7c4ddb59d3}\index{Interrupt\_on\_threshold@{Interrupt\_on\_threshold}!stts22h\_temp\_trshld\_src\_get@{stts22h\_temp\_trshld\_src\_get}}
+\index{stts22h\_temp\_trshld\_src\_get@{stts22h\_temp\_trshld\_src\_get}!Interrupt\_on\_threshold@{Interrupt\_on\_threshold}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_temp\_trshld\_src\_get()}{stts22h\_temp\_trshld\_src\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___gac1c2522b550bb62d7254fd7c4ddb59d3} 
+int32\+\_\+t stts22h\+\_\+temp\+\_\+trshld\+\_\+src\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{\mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\+\_\+temp\+\_\+trlhd\+\_\+src\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Temperature interrupt on threshold source.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Low limit temperature exceeded..(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}

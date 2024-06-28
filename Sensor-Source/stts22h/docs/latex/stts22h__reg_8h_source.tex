@@ -1,0 +1,268 @@
+\doxysection{stts22h\+\_\+reg.\+h}
+\hypertarget{stts22h__reg_8h_source}{}\label{stts22h__reg_8h_source}\mbox{\hyperlink{stts22h__reg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ Define\ to\ prevent\ recursive\ inclusion\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifndef\ STTS22H\_REGS\_H}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ STTS22H\_REGS\_H}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{/*\ Includes\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#ifndef\ DRV\_BYTE\_ORDER}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#ifndef\ \_\_BYTE\_ORDER\_\_}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ DRV\_LITTLE\_ENDIAN\ 1234}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ DRV\_BIG\_ENDIAN\ \ \ \ 4321}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\#define\ DRV\_BYTE\_ORDER\ \ \ \ DRV\_BIG\_ENDIAN}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ DRV\_BYTE\_ORDER\ \ \ \ DRV\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ defined\ \_\_BYTE\_ORDER\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ DRV\_LITTLE\_ENDIAN\ \ \_\_ORDER\_LITTLE\_ENDIAN\_\_}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ DRV\_BIG\_ENDIAN\ \ \ \ \ \_\_ORDER\_BIG\_ENDIAN\_\_}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ DRV\_BYTE\_ORDER\ \ \ \ \ \_\_BYTE\_ORDER\_\_}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_BYTE\_ORDER\_\_*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DRV\_BYTE\_ORDER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#ifndef\ MEMS\_SHARED\_TYPES}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ MEMS\_SHARED\_TYPES}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00079\ \{}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#if\ DRV\_BYTE\_ORDER\ ==\ DRV\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{00081\ \ \ uint8\_t\ bit0\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00082\ \ \ uint8\_t\ bit1\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00083\ \ \ uint8\_t\ bit2\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00084\ \ \ uint8\_t\ bit3\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00085\ \ \ uint8\_t\ bit4\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00086\ \ \ uint8\_t\ bit5\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00087\ \ \ uint8\_t\ bit6\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00088\ \ \ uint8\_t\ bit7\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#elif\ DRV\_BYTE\_ORDER\ ==\ DRV\_BIG\_ENDIAN}}
+\DoxyCodeLine{00090\ \ \ uint8\_t\ bit7\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00091\ \ \ uint8\_t\ bit6\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00092\ \ \ uint8\_t\ bit5\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00093\ \ \ uint8\_t\ bit4\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00094\ \ \ uint8\_t\ bit3\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00095\ \ \ uint8\_t\ bit2\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00096\ \ \ uint8\_t\ bit1\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00097\ \ \ uint8\_t\ bit0\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DRV\_BYTE\_ORDER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00099\ \}\ \mbox{\hyperlink{structbitwise__t}{bitwise\_t}};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ PROPERTY\_DISABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0U)}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ PROPERTY\_ENABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1U)}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{typedef}\ int32\_t\ (*stmdev\_write\_ptr)(\textcolor{keywordtype}{void}\ *,\ uint8\_t,\ \textcolor{keyword}{const}\ uint8\_t\ *,\ uint16\_t);}
+\DoxyCodeLine{00113\ \textcolor{keyword}{typedef}\ int32\_t\ (*stmdev\_read\_ptr)(\textcolor{keywordtype}{void}\ *,\ uint8\_t,\ uint8\_t\ *,\ uint16\_t);}
+\DoxyCodeLine{00114\ \textcolor{keyword}{typedef}\ void\ (*stmdev\_mdelay\_ptr)(uint32\_t\ millisec);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00119\ \ \ stmdev\_write\_ptr\ \ \mbox{\hyperlink{structstmdev__ctx__t_a99b7a22f79ae58c659c50231257650e5}{write\_reg}};}
+\DoxyCodeLine{00120\ \ \ stmdev\_read\_ptr\ \ \ read\_reg;}
+\DoxyCodeLine{00122\ \ \ stmdev\_mdelay\_ptr\ \ \ \mbox{\hyperlink{structstmdev__ctx__t_a83f67a90a785e471d4cd1c5a67a37a4c}{mdelay}};}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{structstmdev__ctx__t_ac6505025bc53574ad09d46597f8475a6}{handle}};}
+\DoxyCodeLine{00125\ \}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MEMS\_SHARED\_TYPES\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#ifndef\ MEMS\_UCF\_SHARED\_TYPES}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ MEMS\_UCF\_SHARED\_TYPES}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00148\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00149\ \{}
+\DoxyCodeLine{00150\ \ \ uint8\_t\ address;}
+\DoxyCodeLine{00151\ \ \ uint8\_t\ data;}
+\DoxyCodeLine{00152\ \}\ \mbox{\hyperlink{structucf__line__t}{ucf\_line\_t}};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MEMS\_UCF\_SHARED\_TYPES\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#define\ STTS22H\_I2C\_ADD\_H\ \ \ \ \ \ \ 0x71U}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#define\ STTS22H\_I2C\_ADD\_L\ \ \ \ \ \ \ 0x7FU}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#define\ STTS22H\_ID\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA0U}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#define\ STTS22H\_WHOAMI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x01U}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#define\ STTS22H\_TEMP\_H\_LIMIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x02U}}
+\DoxyCodeLine{00185\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00186\ \{}
+\DoxyCodeLine{00187\ \ \ uint8\_t\ thl\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 8;}
+\DoxyCodeLine{00188\ \}\ \mbox{\hyperlink{structstts22h__temp__h__limit__t}{stts22h\_temp\_h\_limit\_t}};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#define\ STTS22H\_TEMP\_L\_LIMIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x03U}}
+\DoxyCodeLine{00191\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00192\ \{}
+\DoxyCodeLine{00193\ \ \ uint8\_t\ tll\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 8;}
+\DoxyCodeLine{00194\ \}\ \mbox{\hyperlink{structstts22h__temp__l__limit__t}{stts22h\_temp\_l\_limit\_t}};}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#define\ STTS22H\_CTRL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x04U}}
+\DoxyCodeLine{00197\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00198\ \{}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#if\ DRV\_BYTE\_ORDER\ ==\ DRV\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{00200\ \ \ uint8\_t\ one\_shot\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00201\ \ \ uint8\_t\ time\_out\_dis\ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00202\ \ \ uint8\_t\ freerun\ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00203\ \ \ uint8\_t\ if\_add\_inc\ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00204\ \ \ uint8\_t\ avg\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 2;}
+\DoxyCodeLine{00205\ \ \ uint8\_t\ bdu\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00206\ \ \ uint8\_t\ low\_odr\_start\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#elif\ DRV\_BYTE\_ORDER\ ==\ DRV\_BIG\_ENDIAN}}
+\DoxyCodeLine{00208\ \ \ uint8\_t\ low\_odr\_start\ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00209\ \ \ uint8\_t\ bdu\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00210\ \ \ uint8\_t\ avg\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 2;}
+\DoxyCodeLine{00211\ \ \ uint8\_t\ if\_add\_inc\ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00212\ \ \ uint8\_t\ freerun\ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00213\ \ \ uint8\_t\ time\_out\_dis\ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00214\ \ \ uint8\_t\ one\_shot\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DRV\_BYTE\_ORDER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00216\ \}\ \mbox{\hyperlink{structstts22h__ctrl__t}{stts22h\_ctrl\_t}};}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#define\ STTS22H\_STATUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x05U}}
+\DoxyCodeLine{00219\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00220\ \{}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\#if\ DRV\_BYTE\_ORDER\ ==\ DRV\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{00222\ \ \ uint8\_t\ busy\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00223\ \ \ uint8\_t\ over\_thh\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00224\ \ \ uint8\_t\ under\_thl\ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00225\ \ \ uint8\_t\ not\_used\_01\ \ \ \ \ \ \ \ \ :\ 5;}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#elif\ DRV\_BYTE\_ORDER\ ==\ DRV\_BIG\_ENDIAN}}
+\DoxyCodeLine{00227\ \ \ uint8\_t\ not\_used\_01\ \ \ \ \ \ \ \ \ :\ 5;}
+\DoxyCodeLine{00228\ \ \ uint8\_t\ under\_thl\ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00229\ \ \ uint8\_t\ over\_thh\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00230\ \ \ uint8\_t\ busy\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DRV\_BYTE\_ORDER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00232\ \}\ \mbox{\hyperlink{structstts22h__status__t}{stts22h\_status\_t}};}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#define\ STTS22H\_TEMP\_L\_OUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x06U}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#define\ STTS22H\_TEMP\_H\_OUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x07U}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#define\ STTS22H\_SOFTWARE\_RESET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0CU}}
+\DoxyCodeLine{00237\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00238\ \{}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#if\ DRV\_BYTE\_ORDER\ ==\ DRV\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{00240\ \ \ uint8\_t\ not\_used\_01\ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00241\ \ \ uint8\_t\ sw\_reset\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00242\ \ \ uint8\_t\ not\_used\_02\ \ \ \ \ \ \ \ \ :\ 4;}
+\DoxyCodeLine{00243\ \ \ uint8\_t\ low\_odr\_enable\ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00244\ \ \ uint8\_t\ not\_used\_03\ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#elif\ DRV\_BYTE\_ORDER\ ==\ DRV\_BIG\_ENDIAN}}
+\DoxyCodeLine{00246\ \ \ uint8\_t\ not\_used\_03\ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00247\ \ \ uint8\_t\ low\_odr\_enable\ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00248\ \ \ uint8\_t\ not\_used\_02\ \ \ \ \ \ \ \ \ :\ 4;}
+\DoxyCodeLine{00249\ \ \ uint8\_t\ sw\_reset\ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00250\ \ \ uint8\_t\ not\_used\_01\ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DRV\_BYTE\_ORDER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00252\ \}\ \mbox{\hyperlink{structstts22h__software__reset__t}{stts22h\_software\_reset\_t}};}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00267\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union}}
+\DoxyCodeLine{00268\ \{}
+\DoxyCodeLine{00269\ \ \ \mbox{\hyperlink{structstts22h__temp__h__limit__t}{stts22h\_temp\_h\_limit\_t}}\ \ \ \ \ \ temp\_h\_limit;}
+\DoxyCodeLine{00270\ \ \ \mbox{\hyperlink{structstts22h__temp__l__limit__t}{stts22h\_temp\_l\_limit\_t}}\ \ \ \ \ \ temp\_l\_limit;}
+\DoxyCodeLine{00271\ \ \ \mbox{\hyperlink{structstts22h__ctrl__t}{stts22h\_ctrl\_t}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ ctrl;}
+\DoxyCodeLine{00272\ \ \ \mbox{\hyperlink{structstts22h__status__t}{stts22h\_status\_t}}\ \ \ \ \ \ \ \ \ \ \ \ status;}
+\DoxyCodeLine{00273\ \ \ \mbox{\hyperlink{structstts22h__software__reset__t}{stts22h\_software\_reset\_t}}\ \ \ \ software\_reset;}
+\DoxyCodeLine{00274\ \ \ \mbox{\hyperlink{structbitwise__t}{bitwise\_t}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bitwise;}
+\DoxyCodeLine{00275\ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ byte;}
+\DoxyCodeLine{00276\ \}\ \mbox{\hyperlink{unionstts22h__reg__t}{stts22h\_reg\_t}};}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\#ifndef\ \_\_weak}}
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#define\ \_\_weak\ \_\_attribute\_\_((weak))}}
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_weak\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ *\ These\ are\ the\ basic\ platform\ dependent\ I/O\ routines\ to\ read}}
+\DoxyCodeLine{00289\ \textcolor{comment}{\ *\ and\ write\ device\ registers\ connected\ on\ a\ standard\ bus.}}
+\DoxyCodeLine{00290\ \textcolor{comment}{\ *\ The\ driver\ keeps\ offering\ a\ default\ implementation\ based\ on\ function}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ *\ pointers\ to\ read/write\ routines\ for\ backward\ compatibility.}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ *\ The\ \_\_weak\ directive\ allows\ the\ final\ application\ to\ overwrite}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ *\ them\ with\ a\ custom\ implementation.}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga5edac1c4668284e7e0a37e501ba94d12}{stts22h\_read\_reg}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ reg,}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *data,}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ len);}
+\DoxyCodeLine{00299\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga5a97fe6df47e55f11546659f98087de4}{stts22h\_write\_reg}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ reg,}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *data,}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ len);}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ float\_t\ stts22h\_from\_lsb\_to\_celsius(int16\_t\ lsb);}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00306\ \{}
+\DoxyCodeLine{00307\ \ \ STTS22H\_POWER\_DOWN\ \ \ =\ 0x00,}
+\DoxyCodeLine{00308\ \ \ STTS22H\_ONE\_SHOT\ \ \ \ \ =\ 0x01,}
+\DoxyCodeLine{00309\ \ \ STTS22H\_1Hz\ \ \ \ \ \ \ \ \ \ =\ 0x04,}
+\DoxyCodeLine{00310\ \ \ STTS22H\_25Hz\ \ \ \ \ \ \ \ \ =\ 0x02,}
+\DoxyCodeLine{00311\ \ \ STTS22H\_50Hz\ \ \ \ \ \ \ \ \ =\ 0x12,}
+\DoxyCodeLine{00312\ \ \ STTS22H\_100Hz\ \ \ \ \ \ \ \ =\ 0x22,}
+\DoxyCodeLine{00313\ \ \ STTS22H\_200Hz\ \ \ \ \ \ \ \ =\ 0x32,}
+\DoxyCodeLine{00314\ \}\ stts22h\_odr\_temp\_t;}
+\DoxyCodeLine{00315\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga177a3f64394831b136a1fd20aa038590}{stts22h\_temp\_data\_rate\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stts22h\_odr\_temp\_t\ val);}
+\DoxyCodeLine{00317\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga4f6c130ddd2446a76c9b0ef288ebd65a}{stts22h\_temp\_data\_rate\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stts22h\_odr\_temp\_t\ *val);}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_gaf04b7b13131b608e3d8abc2c00a0d82d}{stts22h\_block\_data\_update\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ val);}
+\DoxyCodeLine{00321\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_gaf415b9ee64bdb433433b638d6104a5e2}{stts22h\_block\_data\_update\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *val);}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga9b5805d3060177e5ff8d69568a80f58f}{stts22h\_temp\_flag\_data\_ready\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *val);}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga47bc4d9c86c7295e1fa711eaddc45fb6}{stts22h\_temperature\_raw\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ int16\_t\ *val);}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga17f3aef0e0536f105ecaba9e81bb445e}{stts22h\_dev\_id\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ *buff);}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00332\ \{}
+\DoxyCodeLine{00333\ \ \ uint8\_t\ busy\ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00334\ \}\ \mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\_dev\_status\_t}};}
+\DoxyCodeLine{00335\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga579e7e7283e9f236338b233020fd21ba}{stts22h\_dev\_status\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structstts22h__dev__status__t}{stts22h\_dev\_status\_t}}\ *val);}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00339\ \{}
+\DoxyCodeLine{00340\ \ \ STTS22H\_SMBUS\_TIMEOUT\_ENABLE\ \ \ \ =\ 0,}
+\DoxyCodeLine{00341\ \ \ STTS22H\_SMBUS\_TIMEOUT\_DISABLE\ \ \ =\ 1,}
+\DoxyCodeLine{00342\ \}\ stts22h\_smbus\_md\_t;}
+\DoxyCodeLine{00343\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_gae8bb6303548bab5c8502c5be4861d52e}{stts22h\_smbus\_interface\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stts22h\_smbus\_md\_t\ val);}
+\DoxyCodeLine{00345\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga783070cd24f37626994dc238a0737357}{stts22h\_smbus\_interface\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stts22h\_smbus\_md\_t\ *val);}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga6273dff080b0a88b16ac59079b7d8b9b}{stts22h\_auto\_increment\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ val);}
+\DoxyCodeLine{00349\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga6c435cd30e5e712a045c7b31b4e09cf6}{stts22h\_auto\_increment\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ *val);}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga8140a98a8c70ef89af857cc8b613b7d2}{stts22h\_temp\_trshld\_high\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ val);}
+\DoxyCodeLine{00352\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_gaa180d84ef258a6236b573e36f63a7b21}{stts22h\_temp\_trshld\_high\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ *val);}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga42ee9e8794733fbb426cd9917a6809e3}{stts22h\_temp\_trshld\_low\_set}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ val);}
+\DoxyCodeLine{00355\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_ga8c48d6d7787994e1122280146427c980}{stts22h\_temp\_trshld\_low\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,\ uint8\_t\ *val);}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00358\ \{}
+\DoxyCodeLine{00359\ \ \ uint8\_t\ under\_thl\ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00360\ \ \ uint8\_t\ over\_thh\ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 1;}
+\DoxyCodeLine{00361\ \}\ \mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\_temp\_trlhd\_src\_t}};}
+\DoxyCodeLine{00362\ int32\_t\ \mbox{\hyperlink{group___s_t_t_s22_h_gac1c2522b550bb62d7254fd7c4ddb59d3}{stts22h\_temp\_trshld\_src\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\_ctx\_t}}\ *ctx,}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structstts22h__temp__trlhd__src__t}{stts22h\_temp\_trlhd\_src\_t}}\ *val);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00370\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00371\ \}}
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STTS22H\_REGS\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \textcolor{comment}{/************************\ (C)\ COPYRIGHT\ STMicroelectronics\ *****END\ OF\ FILE****/}}
+
+\end{DoxyCode}

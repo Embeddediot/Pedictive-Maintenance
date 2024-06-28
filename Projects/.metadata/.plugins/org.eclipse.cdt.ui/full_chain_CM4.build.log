@@ -1,0 +1,10 @@
+09:26:58 **** Build of configuration Debug for project full_chain_CM4 ****
+make -j4 all 
+arm-none-eabi-size  full_chain_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21436	    156	  14088	  35680	   8b60	full_chain_CM4.elf
+Finished building: default.size.stdout
+ 
+
+09:27:00 Build Finished. 0 errors, 0 warnings. (took 2s.345ms)
+

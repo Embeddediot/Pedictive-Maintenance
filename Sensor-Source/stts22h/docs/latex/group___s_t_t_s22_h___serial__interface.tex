@@ -1,0 +1,114 @@
+\doxysubsection{STTS22\+H\+\_\+\+Serial\+\_\+interface}
+\hypertarget{group___s_t_t_s22_h___serial__interface}{}\label{group___s_t_t_s22_h___serial__interface}\index{STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}}
+
+
+This section groups all the functions concerning main serial interface management.  
+
+
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___serial__interface_gae8bb6303548bab5c8502c5be4861d52e}{stts22h\+\_\+smbus\+\_\+interface\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+smbus\+\_\+md\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em SMBus mode..\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___serial__interface_ga783070cd24f37626994dc238a0737357}{stts22h\+\_\+smbus\+\_\+interface\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, stts22h\+\_\+smbus\+\_\+md\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em SMBus mode..\mbox{[}get\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___serial__interface_ga6273dff080b0a88b16ac59079b7d8b9b}{stts22h\+\_\+auto\+\_\+increment\+\_\+set}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}set\mbox{]}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{group___s_t_t_s22_h___serial__interface_ga6c435cd30e5e712a045c7b31b4e09cf6}{stts22h\+\_\+auto\+\_\+increment\+\_\+get}} (const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}ctx, uint8\+\_\+t \texorpdfstring{$\ast$}{*}val)
+\begin{DoxyCompactList}\small\item\em Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}get\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+This section groups all the functions concerning main serial interface management. 
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___s_t_t_s22_h___serial__interface_ga6c435cd30e5e712a045c7b31b4e09cf6}\index{STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}!stts22h\_auto\_increment\_get@{stts22h\_auto\_increment\_get}}
+\index{stts22h\_auto\_increment\_get@{stts22h\_auto\_increment\_get}!STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_auto\_increment\_get()}{stts22h\_auto\_increment\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___serial__interface_ga6c435cd30e5e712a045c7b31b4e09cf6} 
+int32\+\_\+t stts22h\+\_\+auto\+\_\+increment\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of if\+\_\+add\+\_\+inc in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___serial__interface_ga6273dff080b0a88b16ac59079b7d8b9b}\index{STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}!stts22h\_auto\_increment\_set@{stts22h\_auto\_increment\_set}}
+\index{stts22h\_auto\_increment\_set@{stts22h\_auto\_increment\_set}!STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_auto\_increment\_set()}{stts22h\_auto\_increment\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___serial__interface_ga6273dff080b0a88b16ac59079b7d8b9b} 
+int32\+\_\+t stts22h\+\_\+auto\+\_\+increment\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{uint8\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Register address automatically incremented during a multiple byte access with a serial interface.\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of "{}if\+\_\+add\+\_\+inc"{} in reg STTS22H. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___serial__interface_ga783070cd24f37626994dc238a0737357}\index{STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}!stts22h\_smbus\_interface\_get@{stts22h\_smbus\_interface\_get}}
+\index{stts22h\_smbus\_interface\_get@{stts22h\_smbus\_interface\_get}!STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_smbus\_interface\_get()}{stts22h\_smbus\_interface\_get()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___serial__interface_ga783070cd24f37626994dc238a0737357} 
+int32\+\_\+t stts22h\+\_\+smbus\+\_\+interface\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+smbus\+\_\+md\+\_\+t \texorpdfstring{$\ast$}{*}}]{val}{}\end{DoxyParamCaption})}
+
+
+
+SMBus mode..\mbox{[}get\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Get the values of time\+\_\+out\+\_\+dis in reg CTRL.(ptr) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group___s_t_t_s22_h___serial__interface_gae8bb6303548bab5c8502c5be4861d52e}\index{STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}!stts22h\_smbus\_interface\_set@{stts22h\_smbus\_interface\_set}}
+\index{stts22h\_smbus\_interface\_set@{stts22h\_smbus\_interface\_set}!STTS22H\_Serial\_interface@{STTS22H\_Serial\_interface}}
+\doxysubsubsubsection{\texorpdfstring{stts22h\_smbus\_interface\_set()}{stts22h\_smbus\_interface\_set()}}
+{\footnotesize\ttfamily \label{group___s_t_t_s22_h___serial__interface_gae8bb6303548bab5c8502c5be4861d52e} 
+int32\+\_\+t stts22h\+\_\+smbus\+\_\+interface\+\_\+set (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structstmdev__ctx__t}{stmdev\+\_\+ctx\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{ctx}{, }\item[{stts22h\+\_\+smbus\+\_\+md\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+SMBus mode..\mbox{[}set\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctx} & Read / write interface definitions.(ptr) \\
+\hline
+{\em val} & Change the values of "{}time\+\_\+out\+\_\+dis"{} in reg STTS22H. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Interface} & status (MANDATORY\+: return 0 -\/\texorpdfstring{$>$}{>} no Error). \\
+\hline
+\end{DoxyRetVals}

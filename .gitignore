@@ -60,6 +60,17 @@
 **/Listings/
 **/Objects/
 
+<<<<<<< HEAD
+=======
+# IAR specific files
+**/Settings/
+**/Obj/
+**/Exe/
+
+# AC6 specific files
+**/*.launch
+**/out/
+>>>>>>> Uls-devel
 
 # STM32CubeMX generated files
 **/Drivers/

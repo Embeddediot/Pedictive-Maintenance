@@ -1,0 +1,824 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#include "Sensor/stts22h_reg.h"
+#include "Sensor/iis3dwb_reg.h"
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+#ifndef HSEM_ID_0
+#define HSEM_ID_0 (0U) /* HW semaphore 0*/
+#endif
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+#define    BOOT_TIME        10 //ms
+#define FRAME_SIZE 512
+#define OVERLAP_SIZE (FRAME_SIZE / 2)
+
+#define PD6 6
+#define PD7 7
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+
+CRC_HandleTypeDef hcrc;
+
+I2C_HandleTypeDef hi2c2;
+
+SPI_HandleTypeDef hspi1;
+
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim5;
+
+UART_HandleTypeDef huart3;
+
+/* USER CODE BEGIN PV */
+typedef struct {
+    float variance;
+    float kurtosis;
+    float rms;
+} Features;
+
+typedef struct {
+    Features X_features;
+    Features Y_features;
+    Features Z_features;
+} AxisFeatures;
+
+volatile AxisFeatures axis_features __attribute__((section(".shared"))); //shared momery
+
+stmdev_ctx_t dev_ctx_IIS3DWB;
+static uint8_t whoamI_SPI, rst;
+static float offset[3];
+//static int16_t data_raw_temperature;
+//static float temperature_degC;
+
+//static uint8_t tx_buffer[64];
+
+float data_buffer_x[FRAME_SIZE];
+float data_buffer_y[FRAME_SIZE];
+float data_buffer_z[FRAME_SIZE];
+float *volatile current_buffer_x = data_buffer_x;
+float *volatile current_buffer_y = data_buffer_y;
+float *volatile current_buffer_z = data_buffer_z;
+float *volatile processing_buffer_x = data_buffer_x;
+float *volatile processing_buffer_y = data_buffer_y;
+float *volatile processing_buffer_z = data_buffer_z;
+
+/* Global min and max values for normalization */
+const float min_values[9] = {3.99292269f, 3.13895511f, 7.30293895f, -1.20053898f, -1.40820031f, -1.13630907f, 2.21700892f, 2.10821657f, 2.72764564f};
+const float max_values[9] = {29624.1251f, 394383.77f, 221233.469f, 0.904468213f, 1.09869151f, 6.47770410f, 172.154396f, 628.057279f, 470.614985f};
+
+volatile int sample_count = 0;
+volatile int frame_ready = 0;
+
+volatile uint8_t dataFlag = 0;
+
+// Shared data structure
+volatile int16_t data_raw_acceleration[3] = {0};
+volatile float acceleration_mg[3] = {0.0f};
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+static void MX_GPIO_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_SPI1_Init(void);
+static void MX_TIM2_Init(void);
+static void MX_TIM5_Init(void);
+/* USER CODE BEGIN PFP */
+//SPI
+static int32_t platform_write_SPI(void *handle, uint8_t reg, const uint8_t *bufp,
+                              uint16_t len);
+static int32_t platform_read_SPI(void *handle, uint8_t reg, uint8_t *bufp,
+                             uint16_t len);
+
+static void platform_delay(uint32_t ms);
+
+int8_t float_to_int8_t(float value);
+
+void calculate_accelerometer_offset(stmdev_ctx_t *dev_ctx, float *offset);
+
+void process_frame(float *buffer_x, float *buffer_y, float *buffer_z, int size);
+
+void calculate_features(float *buffer, int size, Features *features, int feature_index);
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+/* USER CODE BEGIN Boot_Mode_Sequence_1 */
+  /*HW semaphore Clock enable*/
+  __HAL_RCC_HSEM_CLK_ENABLE();
+  /* Activate HSEM notification for Cortex-M4*/
+  HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+  /*
+  Domain D2 goes to STOP mode (Cortex-M4 in deep-sleep) waiting for Cortex-M7 to
+  perform system initialization (system clock config, external memory configuration.. )
+  */
+  HAL_PWREx_ClearPendingEvent();
+  HAL_PWREx_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFE, PWR_D2_DOMAIN);
+  /* Clear HSEM flag */
+  __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
+
+/* USER CODE END Boot_Mode_Sequence_1 */
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_I2C2_Init();
+  MX_SPI1_Init();
+  MX_TIM2_Init();
+  MX_TIM5_Init();
+  /* USER CODE BEGIN 2 */
+
+  GPIOA->BSRR = (1U << 4); //!!!ENABLE CC PIN FROM START!!!!
+	HAL_Delay(100);
+
+	//IIS3DWB VARIBELS
+	//iis3dwb_pin_int1_route_t int1_route;
+	dev_ctx_IIS3DWB.write_reg = platform_write_SPI;
+	dev_ctx_IIS3DWB.read_reg = platform_read_SPI;
+	dev_ctx_IIS3DWB.mdelay = platform_delay;
+	dev_ctx_IIS3DWB.handle = &hspi1;
+
+
+	//delay
+	platform_delay(BOOT_TIME);
+
+	//check communcation
+	iis3dwb_device_id_get(&dev_ctx_IIS3DWB, &whoamI_SPI);
+
+		if (whoamI_SPI != IIS3DWB_ID)
+			while (1);
+
+	/* Restore default configuration */
+	iis3dwb_reset_set(&dev_ctx_IIS3DWB, PROPERTY_ENABLE);
+
+	do {
+			iis3dwb_reset_get(&dev_ctx_IIS3DWB, &rst);
+	} while (rst);
+
+	/* Enable INT1 data ready interrupt */
+	/*iis3dwb_pin_int1_route_get(&dev_ctx_IIS3DWB, &int1_route);
+	int1_route.drdy_xl = PROPERTY_ENABLE; // enable data ready interrupt on INT1
+	iis3dwb_pin_int1_route_set(&dev_ctx_IIS3DWB, &int1_route);
+	iis3dwb_rst_batch_counter_set(&dev_ctx_IIS3DWB, 0x80); // enable pulsed (not latched) data ready interrupt*/
+
+
+	/* Enable Block Data Update */
+	iis3dwb_block_data_update_set(&dev_ctx_IIS3DWB, PROPERTY_ENABLE);
+	/* Set Output Data Rate */
+	iis3dwb_xl_data_rate_set(&dev_ctx_IIS3DWB, IIS3DWB_XL_ODR_26k7Hz);
+	/* Set full scale */
+	iis3dwb_xl_full_scale_set(&dev_ctx_IIS3DWB, IIS3DWB_4g);
+	/* Configure filtering chain(No aux interface)
+	 * Accelerometer low pass filter path
+	 */
+	iis3dwb_xl_filt_path_on_out_set(&dev_ctx_IIS3DWB, IIS3DWB_LP_ODR_DIV_45); //We are sampling slow so but slowest filter on
+
+	/*mask data ready until filter settle complete
+	 * (bit 3 == 1), disable I2C (bit 2 == 1)*/
+	iis3dwb_all_on_int1_set(&dev_ctx_IIS3DWB, (0x08 | 0x04));
+
+
+
+	/*Read dummy data*/
+	//iis3dwb_acceleration_raw_get(&dev_ctx_IIS3DWB, data_raw_acceleration);
+
+	//offset enable
+	//iis3dwb_usr_offset_block_set(&dev_ctx_IIS3DWB, PROPERTY_ENABLE); //bit 4 enable
+
+	//calculate offset
+	calculate_accelerometer_offset(&dev_ctx_IIS3DWB, offset);
+
+	//start Timer
+	if (HAL_TIM_Base_Start_IT(&htim5) != HAL_OK)
+	{
+		/* Starting Error */
+		Error_Handler();
+	}
+
+	HAL_TIM_Base_Start(&htim2);
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+    // Handle frame processing
+    // Handle frame processing
+    if (frame_ready) {
+      DDRD |= (1 << PD7);
+    	HAL_HSEM_FastTake(HSEM_ID_0);
+			// Process the frame and calculate variance, kurtosis, and RMS
+			process_frame(processing_buffer_x, processing_buffer_y, processing_buffer_z, FRAME_SIZE);
+
+			// Prepare the processing buffers for the next frame with 50% overlap
+//			memmove(processing_buffer_x, processing_buffer_x + OVERLAP_SIZE, OVERLAP_SIZE * sizeof(float));
+//			memmove(processing_buffer_y, processing_buffer_y + OVERLAP_SIZE, OVERLAP_SIZE * sizeof(float));
+//			memmove(processing_buffer_z, processing_buffer_z + OVERLAP_SIZE, OVERLAP_SIZE * sizeof(float));
+
+			frame_ready = 0;
+			HAL_HSEM_Release(HSEM_ID_0,0);
+			DDRD &= ~(1 << PD7);
+    }
+  }
+  /* USER CODE END 3 */
+}
+
+/**
+  * @brief CRC Initialization Function
+  * @param None
+  * @retval None
+  */
+void MX_CRC_Init(void)
+{
+
+  /* USER CODE BEGIN CRC_Init 0 */
+
+  /* USER CODE END CRC_Init 0 */
+
+  /* USER CODE BEGIN CRC_Init 1 */
+
+  /* USER CODE END CRC_Init 1 */
+  hcrc.Instance = CRC;
+  hcrc.Init.DefaultPolynomialUse = DEFAULT_POLYNOMIAL_ENABLE;
+  hcrc.Init.DefaultInitValueUse = DEFAULT_INIT_VALUE_ENABLE;
+  hcrc.Init.InputDataInversionMode = CRC_INPUTDATA_INVERSION_NONE;
+  hcrc.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
+  hcrc.InputDataFormat = CRC_INPUTDATA_FORMAT_BYTES;
+  if (HAL_CRC_Init(&hcrc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CRC_Init 2 */
+
+  /* USER CODE END CRC_Init 2 */
+
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.Timing = 0x00C0EAFF;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
+}
+
+/**
+  * @brief SPI1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI1_Init(void)
+{
+
+  /* USER CODE BEGIN SPI1_Init 0 */
+
+  /* USER CODE END SPI1_Init 0 */
+
+  /* USER CODE BEGIN SPI1_Init 1 */
+
+  /* USER CODE END SPI1_Init 1 */
+  /* SPI1 parameter configuration*/
+  hspi1.Instance = SPI1;
+  hspi1.Init.Mode = SPI_MODE_MASTER;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi1.Init.CRCPolynomial = 0x0;
+  hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
+  hspi1.Init.NSSPolarity = SPI_NSS_POLARITY_LOW;
+  hspi1.Init.FifoThreshold = SPI_FIFO_THRESHOLD_01DATA;
+  hspi1.Init.TxCRCInitializationPattern = SPI_CRC_INITIALIZATION_ALL_ZERO_PATTERN;
+  hspi1.Init.RxCRCInitializationPattern = SPI_CRC_INITIALIZATION_ALL_ZERO_PATTERN;
+  hspi1.Init.MasterSSIdleness = SPI_MASTER_SS_IDLENESS_00CYCLE;
+  hspi1.Init.MasterInterDataIdleness = SPI_MASTER_INTERDATA_IDLENESS_00CYCLE;
+  hspi1.Init.MasterReceiverAutoSusp = SPI_MASTER_RX_AUTOSUSP_DISABLE;
+  hspi1.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_DISABLE;
+  hspi1.Init.IOSwap = SPI_IO_SWAP_DISABLE;
+  if (HAL_SPI_Init(&hspi1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI1_Init 2 */
+
+  /* USER CODE END SPI1_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 100;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 0xFFFFFFFF;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM5_Init(void)
+{
+
+  /* USER CODE BEGIN TIM5_Init 0 */
+
+  /* USER CODE END TIM5_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM5_Init 1 */
+
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 0;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 200000;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM5_Init 2 */
+
+  /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+
+  /* USER CODE END USART3_Init 2 */
+
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PD6 PD7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
+}
+
+/* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+  if (htim->Instance == TIM5)  // Replace TIMx with your timer instance
+  {
+    DDRD |= (1 << PD6);
+
+		// Read raw acceleration data (cast away volatile for function call)
+		iis3dwb_acceleration_raw_get(&dev_ctx_IIS3DWB, (int16_t *)data_raw_acceleration);
+
+		// Convert raw data to mg
+		acceleration_mg[0] = iis3dwb_from_fs4g_to_mg(data_raw_acceleration[0]) - offset[0];
+		acceleration_mg[1] = iis3dwb_from_fs4g_to_mg(data_raw_acceleration[1]) - offset[1];
+		acceleration_mg[2] = iis3dwb_from_fs4g_to_mg(data_raw_acceleration[2]) - offset[2];
+
+		// Buffer the data for each axis
+		if (sample_count < FRAME_SIZE) {
+				current_buffer_x[sample_count] = acceleration_mg[0];  // X-axis
+				current_buffer_y[sample_count] = acceleration_mg[1];  // Y-axis
+				current_buffer_z[sample_count] = acceleration_mg[2];  // Z-axis
+				sample_count++;
+		}
+
+		// Check if the frame is ready
+		if (sample_count == FRAME_SIZE) {
+				frame_ready = 1;
+				sample_count = 0; // Reset sample count
+
+				// Swap the buffers
+				float *temp_x = current_buffer_x;
+				float *temp_y = current_buffer_y;
+				float *temp_z = current_buffer_z;
+
+				current_buffer_x = processing_buffer_x;
+				current_buffer_y = processing_buffer_y;
+				current_buffer_z = processing_buffer_z;
+
+				processing_buffer_x = temp_x;
+				processing_buffer_y = temp_y;
+				processing_buffer_z = temp_z;
+		}
+		DDRD &= ~(1 << PD6);
+	}
+}
+
+void calculate_features(float *buffer, int size, Features *features, int feature_index) {
+    float sum = 0.0f;
+    float sum_sq = 0.0f;
+    float sum_qu = 0.0f;
+    float mean = 0.0f;
+    float variance = 0.0f;
+    float kurtosis = 0.0f;
+    float rms = 0.0f;
+    int i;
+
+    // Calculate mean, sum of squares, and sum of fourth powers
+    for (i = 0; i < size; i++) {
+        float value = buffer[i];
+        sum += value;
+        sum_sq += value * value;
+        sum_qu += value * value * value * value;
+    }
+    mean = sum / size;
+
+    // Calculate variance
+    for (i = 0; i < size; i++) {
+        float diff = buffer[i] - mean;
+        variance += diff * diff;
+    }
+    variance /= size;
+
+    // Calculate kurtosis
+    float mean_sq = sum_sq / size;
+    float mean_qu = sum_qu / size;
+    kurtosis = (mean_qu / (mean_sq * mean_sq)) - 3.0f;
+
+    // Calculate RMS
+    rms = sqrtf(mean_sq);
+
+    // Normalize the features using the min and max values
+    features->variance = (variance - min_values[feature_index]) / (max_values[feature_index] - min_values[feature_index]);
+    features->kurtosis = (kurtosis - min_values[feature_index + 3]) / (max_values[feature_index + 3] - min_values[feature_index + 3]);
+    features->rms = (rms - min_values[feature_index + 6]) / (max_values[feature_index + 6] - min_values[feature_index + 6]);
+}
+
+void process_frame(float *buffer_x, float *buffer_y, float *buffer_z, int size) {
+    // Calculate and store features for X, Y, and Z buffers
+    calculate_features(buffer_x, size, (Features *)&axis_features.X_features, 0);
+    calculate_features(buffer_y, size, (Features *)&axis_features.Y_features, 1);
+    calculate_features(buffer_z, size, (Features *)&axis_features.Z_features, 2);
+}
+
+int8_t float_to_int8_t(float value) {
+    // Step 1: Scale down the float by 2^10
+    float scaled_value = value / (float)(1 << 10);
+
+    // Step 2: Clamp the value to be within [-128, 128]
+    if (scaled_value > 127) {
+        scaled_value = 127;
+    } else if (scaled_value < -127) {
+        scaled_value = -127;
+    }
+
+    // Step 3: Round the value to the nearest integer
+    int32_t rounded_value = (int32_t)round(scaled_value);
+
+    // Step 4: Cast to int8_t
+    int8_t result = (int8_t)rounded_value;
+
+    return result;
+}
+
+void calculate_accelerometer_offset(stmdev_ctx_t *dev_ctx, float *offset)
+{
+    int16_t data_raw_offset[3];
+    int32_t sum[3] = {0, 0, 0};
+
+    for (uint8_t ii = 0; ii < 128; ii++)
+    {
+        memset(data_raw_offset, 0x00, 3 * sizeof(int16_t));
+        iis3dwb_acceleration_raw_get(dev_ctx, data_raw_offset);
+        sum[0] += data_raw_offset[0];
+        sum[1] += data_raw_offset[1];
+        sum[2] += data_raw_offset[2];
+        HAL_Delay(10); // Make sure the sample is ready
+    }
+
+    // Assuming 4g scale, 0.122 is the conversion factor for 4g, 0.061 for 2g
+    offset[0] = (sum[0] * 0.122f) / 129.0f;
+    offset[1] = (sum[1] * 0.122f) / 129.0f;
+    offset[2] = (sum[2] * 0.122f) / 129.0f;
+
+    // Remove gravity from the accelerometer bias calculation
+    if (offset[0] > 0.85f)
+    {
+        offset[0] -= 1.0f;
+    }
+    if (offset[0] < -0.85f)
+    {
+        offset[0] += 1.0f;
+    }
+    if (offset[1] > 0.85f)
+    {
+        offset[1] -= 1.0f;
+    }
+    if (offset[1] < -0.85f)
+    {
+        offset[1] += 1.0f;
+    }
+    if (offset[2] > 0.85f)
+    {
+        offset[2] -= 1.0f;
+    }
+    if (offset[2] < -0.85f)
+    {
+        offset[2] += 1.0f;
+    }
+}
+
+static int32_t platform_write_SPI(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
+{
+    uint8_t tx_buf[len + 1];
+    uint8_t rx_buf[len + 1];  // Dummy receive buffer
+
+    tx_buf[0] = reg;
+    memcpy(&tx_buf[1], bufp, len);
+
+    GPIOA->BSRR = (1U << (4 + 16));  // Reset PA4
+    HAL_SPI_TransmitReceive((SPI_HandleTypeDef*)handle, tx_buf, rx_buf, len + 1, HAL_MAX_DELAY);
+    GPIOA->BSRR = (1U << 4);  // Set PA4
+
+    return 0;
+}
+
+/**
+ * @brief  Read generic device register (platform dependent).
+ */
+static int32_t platform_read_SPI(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+{
+    reg |= 0x80; // Multi-byte read bit for SPI
+
+    uint8_t tx_buf[len + 1];
+    uint8_t rx_buf[len + 1];
+
+    tx_buf[0] = reg;
+    memset(&tx_buf[1], 0, len);  // Fill the rest of tx_buf with dummy bytes
+
+    GPIOA->BSRR = (1U << (4 + 16));  // Reset PA4
+    HAL_SPI_TransmitReceive((SPI_HandleTypeDef*)handle, tx_buf, rx_buf, len + 1, HAL_MAX_DELAY);
+    GPIOA->BSRR = (1U << 4);  // Set PA4
+
+    memcpy(bufp, &rx_buf[1], len);
+
+    return 0;
+}
+/**
+ * @brief  Platform specific delay (platform dependent).
+ */
+static void platform_delay(uint32_t ms)
+{
+    HAL_Delay(ms);
+}
+/* USER CODE END 4 */
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+
+#ifdef  USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */
