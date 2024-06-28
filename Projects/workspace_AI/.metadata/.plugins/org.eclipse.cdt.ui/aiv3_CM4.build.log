@@ -1,0 +1,10 @@
+10:13:17 **** Incremental Build of configuration Debug for project aiv3_CM4 ****
+make -j8 all 
+arm-none-eabi-size  aiv3_CM4.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3148	     16	   1568	   4732	   127c	aiv3_CM4.elf
+Finished building: default.size.stdout
+ 
+
+10:13:17 Build Finished. 0 errors, 0 warnings. (took 258ms)
+

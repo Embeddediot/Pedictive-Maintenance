@@ -1,0 +1,10 @@
+10:13:29 **** Incremental Build of configuration Debug for project aiv5_CM7 ****
+make -j8 all 
+arm-none-eabi-size  aiv5_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 845052	   3112	 190424	1038588	  fd8fc	aiv5_CM7.elf
+Finished building: default.size.stdout
+ 
+
+10:13:30 Build Finished. 0 errors, 0 warnings. (took 250ms)
+

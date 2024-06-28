@@ -1,0 +1,10 @@
+10:13:15 **** Incremental Build of configuration Debug for project ai_test2_CM7 ****
+make -j8 all 
+arm-none-eabi-size  ai_test2_CM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 432140	   3108	  97588	 532836	  82164	ai_test2_CM7.elf
+Finished building: default.size.stdout
+ 
+
+10:13:16 Build Finished. 0 errors, 0 warnings. (took 353ms)
+
